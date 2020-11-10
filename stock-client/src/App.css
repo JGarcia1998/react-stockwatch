@@ -1,38 +1,69 @@
-.App {
-  text-align: center;
-}
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit; }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+html {
+  font-size: 62.5%; }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+  line-height: 1.7;
+  background-image: linear-gradient(to right, #000428, #004e92);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh; }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.main-body {
+  background-color: #f9f9fd;
+  width: 90vw;
+  height: 80vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.navbar {
+  float: left;
+  height: 100%;
+  padding: 3rem;
+  width: 20%;
+  background-color: #e1e9f7;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
+  justify-content: space-evenly; }
+  .navbar__img {
+    background-image: url("./img/stock.svg");
+    width: 2.5rem;
+    height: 2.5rem;
+    background-size: cover;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+    color: blue;
+    fill: blue; }
+  .navbar__icon {
+    display: flex;
+    align-items: center; }
+  .navbar__label {
+    margin-left: 1.8rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #777; }
+  .navbar__container {
+    text-align: center; }
+    .navbar__container-heading {
+      font-size: 2.5rem;
+      color: black;
+      letter-spacing: 2px;
+      font-weight: 400; }
+    .navbar__container-item {
+      color: grey;
+      font-size: 1.2rem;
+      width: 100%; }

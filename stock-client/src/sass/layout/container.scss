@@ -1,0 +1,63 @@
+.main-body {
+  background-color: rgb(249, 249, 253);
+  width: 90vw;
+  height: 80vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.navbar {
+  float: left;
+  height: 100%;
+  padding: 3rem;
+  width: 20%;
+  background-color: rgb(225, 233, 247);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+
+  &__img {
+    background-image: url("./img/stock.svg");
+    width: 2.5rem;
+    height: 2.5rem;
+    background-size: cover;
+    margin: 0 auto;
+    margin-bottom: 0.5rem;
+    color: blue;
+    fill: blue;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+  }
+
+  &__label {
+    margin-left: 1.8rem;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #777;
+  }
+
+  &__container {
+    text-align: center;
+
+    &-heading {
+      font-size: 2.5rem;
+      color: black;
+      letter-spacing: 2px;
+      font-weight: 400;
+    }
+
+    &-item {
+      color: grey;
+      font-size: 1.2rem;
+      width: 100%;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+*,
+*::after,
+*::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  box-sizing: border-box;
+  line-height: 1.7;
+  background-image: linear-gradient(to right, #000428, #004e92);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
