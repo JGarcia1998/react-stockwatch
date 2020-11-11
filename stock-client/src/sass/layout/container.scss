@@ -1,18 +1,18 @@
 .main-body {
-  background-color: rgb(249, 249, 253);
+  background-color: rgb(251, 251, 255);
   width: 90vw;
-  height: 80vh;
+  height: 90vh;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
 }
 
 .navbar {
-  float: left;
-  height: 100%;
   padding: 3rem;
-  width: 20%;
+
   background-color: rgb(225, 233, 247);
   display: flex;
   flex-direction: column;
@@ -25,8 +25,6 @@
     background-size: cover;
     margin: 0 auto;
     margin-bottom: 0.5rem;
-    color: blue;
-    fill: blue;
   }
 
   &__icon {
@@ -60,4 +58,429 @@
       width: 100%;
     }
   }
+}
+
+.header {
+  margin: 3rem;
+
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+
+  &__stock-news-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    margin-left: 1rem;
+
+    &-title {
+      font-size: 1.4rem;
+      color: black;
+      font-weight: 400;
+    }
+
+    &-name {
+      font-size: 1rem;
+      color: grey;
+      font-weight: 300;
+    }
+
+    &-news {
+      margin-left: auto;
+      font-size: 1.2rem;
+      text-decoration: none;
+      font-weight: 300;
+      color: rgb(49, 115, 212);
+      transition: 0.2s;
+    }
+
+    &-news:hover {
+      color: rgb(0, 32, 80);
+    }
+
+    &-container {
+      display: flex;
+      margin-top: 2rem;
+      align-items: center;
+      padding-right: 2rem;
+    }
+
+    &-col {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-logo-twtr {
+      @include logo;
+      background-color: rgb(0, 68, 255);
+    }
+
+    &-logo-twtr::after {
+      content: "T";
+      @include icon;
+    }
+
+    &-logo-ford {
+      @include logo;
+      background-color: rgb(255, 51, 0);
+    }
+
+    &-logo-ford::after {
+      content: "F";
+      @include icon;
+    }
+
+    &-logo-tsla {
+      @include logo;
+      background-color: rgb(0, 255, 136);
+    }
+
+    &-logo-tsla::after {
+      content: "T";
+      @include icon;
+    }
+
+    &-logo-amzn {
+      @include logo;
+      background-color: rgb(0, 217, 255);
+    }
+
+    &-logo-amzn::after {
+      content: "A";
+      @include icon;
+    }
+
+    &-logo-snap {
+      @include logo;
+      background-color: rgb(245, 241, 0);
+    }
+
+    &-logo-snap::after {
+      content: "S";
+      @include icon;
+    }
+
+    &-logo-btc {
+      @include logo;
+      background-color: rgb(32, 31, 32);
+    }
+
+    &-logo-btc::after {
+      content: "B";
+      @include icon;
+    }
+  }
+
+  &__flex-col {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__grid-title {
+    font-size: 1.2rem;
+    font-style: italic;
+  }
+
+  &__grid-price {
+    font-size: 1rem;
+    color: rgb(116, 115, 115);
+  }
+
+  &__flex-row {
+    display: flex;
+    justify-content: space-around;
+    margin: 0.5rem 0;
+  }
+
+  &__stats {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-align: center;
+  }
+
+  &__stock-news-word {
+    position: absolute;
+    font-size: 1rem;
+    left: 13%;
+    top: 40%;
+    transform: translateY(-50%) rotate(-35deg);
+  }
+
+  &__stock-news {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 7rem;
+    height: 5rem;
+    display: flex;
+
+    clip-path: polygon(0 0, 0 100%, 100% 0);
+
+    text-decoration: none;
+    background-color: rgba(21, 34, 39, 0.8);
+    color: #fff;
+    font-weight: 300;
+    font-size: 1rem;
+    text-transform: uppercase;
+    border: none;
+    border-radius: 4px;
+  }
+
+  &__stock-title {
+    font-size: 1.5rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 20%;
+  }
+
+  &__stock-price {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    font-size: 1.2rem;
+    color: rgb(30, 216, 139);
+  }
+
+  &__icon {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    background-image: linear-gradient(
+      to bottom,
+      rgb(154, 180, 250),
+      rgb(86, 130, 250)
+    );
+
+    border-radius: 8px;
+    transform: rotate(45deg);
+    border: none;
+
+    width: 3rem;
+    height: 3rem;
+
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+
+    cursor: pointer;
+  }
+
+  &__icon::after {
+    content: "A";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 300;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &__icon-2 {
+    position: absolute;
+    left: 1rem;
+    bottom: 1rem;
+    background-image: linear-gradient(
+      to bottom,
+      rgb(252, 163, 141),
+      rgb(253, 76, 31)
+    );
+
+    border-radius: 8px;
+    transform: rotate(45deg);
+    border: none;
+
+    width: 3rem;
+    height: 3rem;
+
+    color: #fff;
+    font-size: 2rem;
+    text-align: center;
+
+    cursor: pointer;
+  }
+
+  &__icon-2::after {
+    content: "N";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: #fff;
+    font-size: 2rem;
+    font-weight: 300;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &__stock-hold {
+    display: flex;
+  }
+
+  &__stock {
+    width: 25rem;
+    height: 15rem;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 2rem;
+    box-shadow: 0 1rem 1rem rgba(black, 0.1);
+    margin-left: 1rem;
+    margin-right: 1rem;
+    position: relative;
+    padding: 1rem;
+    margin-bottom: 5rem;
+    cursor: pointer;
+  }
+
+  &__news-title {
+    font-size: 2.3rem;
+    color: black;
+    letter-spacing: 1px;
+    font-weight: 300;
+  }
+
+  &__title {
+    font-size: 3rem;
+    font-weight: 500;
+    letter-spacing: 1px;
+    color: black;
+  }
+
+  &__p {
+    color: #777;
+    font-size: 1.3rem;
+  }
+}
+
+.main-right {
+  background-color: rgb(242, 244, 248);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 0 3rem;
+  &__info {
+    margin-top: auto;
+
+    width: 100%;
+    height: 40%;
+
+    &-name {
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__text {
+    color: #777;
+    font-size: 1.3rem;
+    font-weight: 300;
+  }
+
+  &-chart {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    height: 60%;
+  }
+
+  &__logo {
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+    width: 3rem;
+    height: 3rem;
+    padding: 3rem;
+    background-image: linear-gradient(
+      to bottom,
+      rgb(164, 252, 164),
+      rgb(22, 243, 59)
+    );
+    color: #fff;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  &__stock {
+    width: 28rem;
+    height: 35rem;
+    background-color: rgba(#fff, 0.9);
+    box-shadow: 0 1rem 1rem rgba(black, 0.1);
+    border-radius: 8px;
+    position: absolute;
+    top: -2rem;
+    right: -3rem;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__name {
+    font-size: 3rem;
+    font-weight: 400;
+    margin-bottom: 2rem;
+  }
+
+  &__price {
+    font-size: 1.8rem;
+    color: rgb(39, 39, 39);
+    letter-spacing: 2px;
+  }
+
+  &__percentage {
+    color: #777;
+    font-size: 1rem;
+  }
+
+  &__days {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-self: center;
+    margin-top: auto;
+    color: #777;
+    font-size: 1.2rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  &__times {
+    cursor: pointer;
+  }
+}
+
+.btn-fixed {
+  position: absolute;
+  bottom: 3rem;
+  right: 3rem;
+  background-color: rgb(49, 115, 212);
+
+  border-radius: 15px;
+  transform: rotate(45deg);
+  border: none;
+
+  width: 6rem;
+  height: 6rem;
+  z-index: 100;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  box-shadow: 1rem 1rem 2rem rgba(black, 0.3);
+  cursor: pointer;
+  outline: none;
+}
+.c {
+  color: rgb(0, 68, 255);
+}
+
+.btn-fixed::after {
+  content: "+";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #fff;
+  font-size: 4rem;
+  font-weight: 300;
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
