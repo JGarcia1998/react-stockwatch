@@ -43,10 +43,15 @@
     &-news {
       margin-left: auto;
       font-size: 1.2rem;
-      text-decoration: none;
+
       font-weight: 300;
       color: rgb(49, 115, 212);
       transition: 0.2s;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      text-decoration: underline;
+      outline: none;
     }
 
     &-news:hover {

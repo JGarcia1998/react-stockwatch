@@ -331,10 +331,14 @@ body {
     .header__stock-news-grid-news {
       margin-left: auto;
       font-size: 1.2rem;
-      text-decoration: none;
       font-weight: 300;
       color: #3173d4;
-      transition: 0.2s; }
+      transition: 0.2s;
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+      text-decoration: underline;
+      outline: none; }
     .header__stock-news-grid-news:hover {
       color: #002050; }
     .header__stock-news-grid-container {
@@ -539,12 +543,51 @@ body {
   .main-right__times {
     cursor: pointer; }
 
+@keyframes fade-in {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-110%); }
+  100% {
+    opacity: 1;
+    transform: translateX(0); } }
+
 .news {
   width: 100%;
   display: flex;
   margin: 1rem auto;
   background-image: linear-gradient(to right bottom, #525252, #202020);
   border-radius: 4px; }
+  .news-popup {
+    animation: fade-in 0.4s;
+    width: 95vw;
+    height: 95vh;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    z-index: 300;
+    outline: none;
+    overflow-y: scroll; }
+  .news-close {
+    font-size: 3rem;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: #3a3a3a;
+    background-color: transparent;
+    border: none;
+    font-weight: 400;
+    cursor: pointer; }
+  .news-popup-false {
+    display: none; }
   .news__img {
     height: 100%;
     width: 30%;
@@ -560,6 +603,24 @@ body {
     color: #dbdbdb;
     font-weight: 300; }
   .news__col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2rem; }
+
+.stock-updates {
+  width: 60%;
+  display: flex;
+  margin: 2rem auto;
+  background-image: linear-gradient(to right bottom, #525252, #202020);
+  border-radius: 4px;
+  animation: slide-in 1.3s;
+  animation-delay: 0.5; }
+  .stock-updates__img {
+    width: 40%;
+    object-fit: cover;
+    border-radius: 4px; }
+  .stock-updates__col {
     display: flex;
     flex-direction: column;
     justify-content: space-around;

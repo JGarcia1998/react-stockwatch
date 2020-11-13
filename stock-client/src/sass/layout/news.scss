@@ -1,3 +1,23 @@
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slide-in {
+  0% {
+    opacity: 0;
+    transform: translateX(-110%);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
 .news {
   width: 100%;
   display: flex;
@@ -9,6 +29,37 @@
     rgb(32, 32, 32)
   );
   border-radius: 4px;
+
+  &-popup {
+    animation: fade-in 0.4s;
+    width: 95vw;
+    height: 95vh;
+    background-color: #fff;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 4px;
+    z-index: 300;
+    outline: none;
+    overflow-y: scroll;
+  }
+
+  &-close {
+    font-size: 3rem;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    color: rgb(58, 58, 58);
+    background-color: transparent;
+    border: none;
+    font-weight: 400;
+    cursor: pointer;
+  }
+
+  &-popup-false {
+    display: none;
+  }
 
   &__img {
     height: 100%;
@@ -28,6 +79,35 @@
     font-size: 1.2rem;
     color: rgb(219, 219, 219);
     font-weight: 300;
+  }
+
+  &__col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 2rem;
+  }
+}
+
+.stock-updates {
+  width: 60%;
+  display: flex;
+
+  margin: 2rem auto;
+  background-image: linear-gradient(
+    to right bottom,
+    rgb(82, 82, 82),
+    rgb(32, 32, 32)
+  );
+
+  border-radius: 4px;
+  animation: slide-in 1.3s;
+  animation-delay: 0.5;
+
+  &__img {
+    width: 40%;
+    object-fit: cover;
+    border-radius: 4px;
   }
 
   &__col {

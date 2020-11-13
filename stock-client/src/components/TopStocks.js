@@ -6,15 +6,6 @@ function TopStocks(props) {
 
   const changeStock = (e) => {
     setPrevStock(props.selectedStock);
-    // setSelectedStock({
-    //   name: e.target.dataset.symbol,
-    //   price: e.target.dataset.price,
-    //   symbol: e.target.dataset.attr,
-    //   open: "$" + "122.45",
-    //   close: "$" + "134.56",
-    //   high: "$" + "188.94",
-    //   low: "$" + "111.23",
-    // });
     props.onSetSelectedStock(e);
   };
 
