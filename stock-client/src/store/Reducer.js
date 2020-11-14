@@ -8,6 +8,8 @@ const initialState = {
     high: "$" + "188.94",
     low: "$" + "111.23",
   },
+
+  authenticated: false,
 };
 
 const reducer = (state = initialState, action) => {
@@ -15,6 +17,11 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       selectedStock: action.value,
+    };
+  } else if (action.type == "SETAUTHENTICATED") {
+    return {
+      ...state,
+      authenticated: action.value,
     };
   }
   return state;

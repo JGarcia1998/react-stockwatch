@@ -23,7 +23,7 @@ function Navbar() {
         <HomeOutlinedIcon
           style={{ fontSize: 30, zIndex: 250, color: "black" }}
         ></HomeOutlinedIcon>
-        <div className="navbar__label active">Dashboard</div>
+        <div className="navbar__label">Dashboard</div>
       </NavLink>
 
       <NavLink to="/watchlist" className="navbar__icon">
