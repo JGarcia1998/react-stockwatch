@@ -8,6 +8,24 @@
   transform: translate(-50%, -50%) rotate(-45deg);
 }
 
+@mixin mainIcon {
+  border-radius: 8px;
+  transform: rotate(45deg);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  color: #fff;
+  font-size: 2rem;
+  text-align: center;
+  cursor: pointer;
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+}
+
 @mixin logo {
   display: block;
 

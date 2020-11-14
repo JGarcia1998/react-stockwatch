@@ -1,15 +1,13 @@
 import React from "react";
-import { Icon } from "@material-ui/core";
-import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
-import AddShoppingCartRoundedIcon from "@material-ui/icons/AddShoppingCartRounded";
-import ShowChartRoundedIcon from "@material-ui/icons/ShowChartRounded";
-import GraphicEqRoundedIcon from "@material-ui/icons/GraphicEqRounded";
-import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
+import Navbar from "./Navbar";
+import StockNews from "./StockNews";
+import TopStocks from "./TopStocks";
 import { useEffect, useState } from "react";
+import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
-function Container() {
+function Container(props) {
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
@@ -20,71 +18,20 @@ function Container() {
   const classes = useStyles();
   const [news, setNews] = useState([]);
 
-  useEffect(() => {
-    fetch(
-      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_KEY}`
-    )
-      .then((response) => response.json())
-      .then((result) => {
-        setNews(result.articles);
-      });
-  }, [setNews]);
+  //   useEffect(() => {
+  //     fetch(
+  //       `https://newsapi.org/v2/top-headlines?country=us?category=business?&apiKey=${process.env.REACT_APP_KEY}`
+  //     )
+  //       .then((response) => response.json())
+  //       .then((result) => {
+  //         setNews(result.articles);
+  //       });
+  //   }, [setNews]);
 
   return (
     <>
       <div className="main-body">
-        <div className="navbar">
-          <div className="navbar__container">
-            <div className="navbar__img"></div>
-            <h1 className="navbar__container-heading">StockWatch</h1>
-            <p className="navbar__container-item">
-              Up to date stock and crypto currencies daily
-            </p>
-          </div>
-
-          <div className="navbar__icon">
-            <HomeOutlinedIcon style={{ fontSize: 30 }}></HomeOutlinedIcon>
-            <a href="#" className="navbar__label active">
-              Dashboard
-            </a>
-          </div>
-
-          <div className="navbar__icon">
-            <AddShoppingCartRoundedIcon
-              style={{ fontSize: 30 }}
-            ></AddShoppingCartRoundedIcon>
-            <a href="#" className="navbar__label">
-              Watchlist
-            </a>
-          </div>
-
-          <div className="navbar__icon">
-            <ShowChartRoundedIcon
-              style={{ fontSize: 30 }}
-            ></ShowChartRoundedIcon>
-            <a href="#" className="navbar__label">
-              Stocks
-            </a>
-          </div>
-
-          <div className="navbar__icon">
-            <GraphicEqRoundedIcon
-              style={{ fontSize: 30 }}
-            ></GraphicEqRoundedIcon>
-            <a href="#" className="navbar__label">
-              Crypto
-            </a>
-          </div>
-
-          <div className="navbar__icon">
-            <ExitToAppRoundedIcon
-              style={{ fontSize: 30 }}
-            ></ExitToAppRoundedIcon>
-            <a href="#" className="navbar__label">
-              Sign out
-            </a>
-          </div>
-        </div>
+        <Navbar></Navbar>
 
         <div className="header">
           <h2 className="header__title">Top Stocks</h2>
@@ -92,150 +39,15 @@ function Container() {
             Latest prices and news related to each currency
           </p>
 
-          <div className="header__stock-hold">
-            {/* <DragDropContainer targetKey="foo"> */}
-            <div className="header__stock">
-              <a href="#" className="header__stock-news">
-                <div className="header__stock-news-word">News</div>
-              </a>
-
-              <h2 className="header__stats">Stats</h2>
-
-              <div className="header__flex-col">
-                <div className="header__flex-row">
-                  <span className="header__grid-title">High:</span>
-                  <span className="header__grid-price">$495.85</span>
-                  <span className="header__grid-title">Low:</span>
-                  <span className="header__grid-price">467.26</span>
-                </div>
-
-                <div className="header__flex-row">
-                  <span className="header__grid-title">Open:</span>
-                  <span className="header__grid-price">$495.85</span>
-                  <span className="header__grid-title">Close:</span>
-                  <span className="header__grid-price">467.26</span>
-                </div>
-              </div>
-
-              <button className="header__icon"></button>
-              <p className="header__stock-title">Apple</p>
-              <p className="header__stock-price">15%</p>
-            </div>
-            {/* </DragDropContainer> */}
-
-            <div className="header__stock">
-              <a href="#" className="header__stock-news">
-                <div className="header__stock-news-word">News</div>
-              </a>
-              <h2 className="header__stats">Stats</h2>
-              <div className="header__flex-col">
-                <div className="header__flex-row">
-                  <span className="header__grid-title">High:</span>
-                  <span className="header__grid-price">$495.85</span>
-                  <span className="header__grid-title">Low:</span>
-                  <span className="header__grid-price">467.26</span>
-                </div>
-
-                <div className="header__flex-row">
-                  <span className="header__grid-title">Open:</span>
-                  <span className="header__grid-price">$495.85</span>
-                  <span className="header__grid-title">Close:</span>
-                  <span className="header__grid-price">467.26</span>
-                </div>
-              </div>
-              <button className="header__icon-2"></button>
-              <p className="header__stock-title">Netflix</p>
-              <p className="header__stock-price">12%</p>
-            </div>
-          </div>
+          <TopStocks></TopStocks>
 
           <h2 className="header__news-title">Individual stock updates</h2>
 
-          <div className="header__stock-news-grid">
-            <div className="header__stock-news-grid-container">
-              <span className="header__stock-news-grid-logo-twtr"></span>
-
-              <div className="header__stock-news-grid-col">
-                <p className="header__stock-news-grid-title">TWTR</p>
-                <p className="header__stock-news-grid-name">
-                  Social Network Company
-                </p>
-              </div>
-              <a className="header__stock-news-grid-news" href="#">
-                Updates
-              </a>
-            </div>
-
-            <div className="header__stock-news-grid-container">
-              <span className="header__stock-news-grid-logo-ford"></span>
-
-              <div className="header__stock-news-grid-col">
-                <p className="header__stock-news-grid-title">FORD</p>
-                <p className="header__stock-news-grid-name">Car manufacturer</p>
-              </div>
-              <a className="header__stock-news-grid-news" href="#">
-                Updates
-              </a>
-            </div>
-
-            <div className="header__stock-news-grid-container">
-              <span className="header__stock-news-grid-logo-btc"></span>
-
-              <div className="header__stock-news-grid-col">
-                <p className="header__stock-news-grid-title">BTC</p>
-                <p className="header__stock-news-grid-name">Crypto currency</p>
-              </div>
-              <a className="header__stock-news-grid-news" href="#">
-                Updates
-              </a>
-            </div>
-
-            <div className="header__stock-news-grid-container">
-              <span className="header__stock-news-grid-logo-tsla"></span>
-
-              <div className="header__stock-news-grid-col">
-                <p className="header__stock-news-grid-title">TSLA</p>
-                <p className="header__stock-news-grid-name">
-                  Electric car manufacturer
-                </p>
-              </div>
-              <a className="header__stock-news-grid-news" href="#">
-                Updates
-              </a>
-            </div>
-
-            <div className="header__stock-news-grid-container">
-              <span className="header__stock-news-grid-logo-amzn"></span>
-
-              <div className="header__stock-news-grid-col">
-                <p className="header__stock-news-grid-title">AMZN</p>
-                <p className="header__stock-news-grid-name">
-                  Social Network Company
-                </p>
-              </div>
-              <a className="header__stock-news-grid-news" href="#">
-                Updates
-              </a>
-            </div>
-
-            <div className="header__stock-news-grid-container">
-              <span className="header__stock-news-grid-logo-snap"></span>
-
-              <div className="header__stock-news-grid-col">
-                <p className="header__stock-news-grid-title">SNAP</p>
-                <p className="header__stock-news-grid-name">
-                  Social Network Company
-                </p>
-              </div>
-              <a className="header__stock-news-grid-news" href="#">
-                Updates
-              </a>
-            </div>
-          </div>
+          <StockNews></StockNews>
 
           <h2 className="header__news-title">News articles around the globe</h2>
 
-          {news.splice(0, 6).map((article) => {
+          {/* {news.splice(0, 6).map((article) => {
             return (
               <div className="news">
                 <img
@@ -261,14 +73,14 @@ function Container() {
                 </div>
               </div>
             );
-          })}
+          })} */}
         </div>
 
         <div className="main-right">
           <div className="main-right__stock">
-            <div className="main-right__logo">G</div>
-            <h2 className="main-right__name">GOOGL</h2>
-            <p className="main-right__price">$1,999</p>
+            <div className="main-right__logo">{props.selectedStock.symbol}</div>
+            <h2 className="main-right__name">{props.selectedStock.name}</h2>
+            <p className="main-right__price">${props.selectedStock.price}</p>
             <p className="main-right__percentage">+2.2% (5.76)</p>
             <svg
               className="main-right-chart"
@@ -307,4 +119,10 @@ function Container() {
   );
 }
 
-export default Container;
+const mapStateToProps = (state) => {
+  return {
+    selectedStock: state.selectedStock,
+  };
+};
+
+export default connect(mapStateToProps)(Container);

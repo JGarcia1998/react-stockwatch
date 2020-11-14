@@ -1,0 +1,137 @@
+.login {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__svg {
+    background-color: #fff;
+    margin-right: 1rem;
+    -webkit-mask-image: url("./img/stock.svg");
+    mask-image: url("./img/stock.svg");
+    width: 2.5rem;
+    height: 2.5rem;
+
+    mask-size: cover;
+    margin-bottom: 0.5rem;
+  }
+
+  &__title {
+    font-size: 1.5rem;
+    color: #fff;
+    font-weight: 400;
+  }
+}
+
+.container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 35rem;
+  height: 35rem;
+  background-image: linear-gradient(to bottom, #673ab7, #512da8);
+  border-radius: 4px;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem 2rem;
+
+  &__guest {
+    border: none;
+    background-color: transparent;
+    margin-left: 1rem;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  &__guest:hover {
+    color: rgb(255, 255, 255);
+  }
+
+  &__title {
+    font-size: 1.8rem;
+    color: #fff;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 2rem;
+  }
+
+  &__text {
+    text-align: center;
+    color: rgb(182, 182, 182);
+    font-size: 1.2rem;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  &__input-container {
+    align-self: start;
+    width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  &__input-title {
+    color: #fff;
+    font-size: 1.2rem;
+    margin-bottom: 0.2rem;
+  }
+
+  &__input {
+    width: 100%;
+    background-color: transparent;
+    border: 1px solid rgb(202, 201, 201);
+    border-radius: 4px;
+    padding: 1rem;
+    outline: none;
+    transition: all 0.3s;
+    caret-color: #fff;
+  }
+
+  &__input:focus {
+    border-color: rgb(255, 255, 255);
+  }
+
+  &__input::placeholder {
+    color: rgb(182, 182, 182);
+  }
+
+  &__btn {
+    width: 100%;
+    border-radius: 4px;
+    background-image: linear-gradient(
+      to bottom,
+      rgba(245, 245, 245, 0.9),
+      rgba(216, 216, 216, 0.9)
+    );
+    padding: 1.2rem;
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+    color: rgb(43, 43, 43);
+    border: none;
+    outline: none;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  &__btn:hover {
+    background-color: rgb(44, 44, 44);
+  }
+
+  &__registration {
+    color: rgb(202, 201, 201);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  &__register {
+    color: black;
+    font-weight: 400;
+    font-size: 1.4rem;
+  }
+}

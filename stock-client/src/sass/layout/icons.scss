@@ -1,0 +1,55 @@
+.header {
+  &__icon {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(103, 250, 218),
+      rgb(0, 209, 164)
+    );
+
+    @include mainIcon;
+  }
+
+  &__icon-2-symbol {
+    transform: rotate(-45deg);
+  }
+  &__icon-1-symbol {
+    transform: rotate(-45deg);
+  }
+
+  &__icon-3-symbol {
+    transform: rotate(-45deg);
+  }
+  &__icon-4-symbol {
+    transform: rotate(-45deg);
+  }
+
+  &__icon-2 {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(252, 163, 141),
+      rgb(253, 76, 31)
+    );
+
+    @include mainIcon;
+  }
+
+  &__icon-3 {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(117, 126, 255),
+      rgb(25, 39, 231)
+    );
+
+    @include mainIcon;
+  }
+
+  &__icon-4 {
+    background-image: linear-gradient(
+      to bottom,
+      rgb(141, 252, 156),
+      rgb(4, 209, 113)
+    );
+
+    @include mainIcon;
+  }
+}

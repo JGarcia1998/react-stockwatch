@@ -1,0 +1,61 @@
+.header__stock-news-grid {
+  &-logo-twtr {
+    @include logo;
+    background-color: rgb(0, 68, 255);
+  }
+
+  &-logo-twtr::after {
+    content: "T";
+    @include icon;
+  }
+
+  &-logo-ford {
+    @include logo;
+    background-color: rgb(255, 51, 0);
+  }
+
+  &-logo-ford::after {
+    content: "F";
+    @include icon;
+  }
+
+  &-logo-tsla {
+    @include logo;
+    background-color: rgb(0, 255, 136);
+  }
+
+  &-logo-tsla::after {
+    content: "T";
+    @include icon;
+  }
+
+  &-logo-amzn {
+    @include logo;
+    background-color: rgb(0, 217, 255);
+  }
+
+  &-logo-amzn::after {
+    content: "A";
+    @include icon;
+  }
+
+  &-logo-snap {
+    @include logo;
+    background-color: rgb(245, 241, 0);
+  }
+
+  &-logo-snap::after {
+    content: "S";
+    @include icon;
+  }
+
+  &-logo-btc {
+    @include logo;
+    background-color: rgb(32, 31, 32);
+  }
+
+  &-logo-btc::after {
+    content: "B";
+    @include icon;
+  }
+}
