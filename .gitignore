@@ -1,10 +1,4 @@
 node_modules
 ./stock-server/.env
 .env
-
-config
-/config
-
-./stock-server/config/config.json
-/stock-server/config/config.json
 stock-server/config/config.json
