@@ -3,3 +3,4 @@ node_modules
 .env
 /stock-server/config
 stock-server/config
+config
