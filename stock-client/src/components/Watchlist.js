@@ -41,23 +41,24 @@ function Watchlist(props) {
           {props.currId !== null ? (
             <p className="header__p">Here are all of your saved stocks</p>
           ) : null}
+          <div className="watchlist__wrap">
+            {watchlist.map((stock) => {
+              let symbol = stock.symbol.split("")[0];
+              return (
+                <div className="watchlist">
+                  <div className="watchlist__symbol">
+                    <span className="watchlist__ltr">{symbol}</span>
+                  </div>
 
-          {watchlist.map((stock) => {
-            let symbol = stock.symbol.split("")[0];
-            return (
-              <div className="watchlist">
-                <div className="watchlist__symbol">
-                  <span className="watchlist__ltr">{symbol}</span>
+                  <h2 className="watchlist__name">{stock.symbol}</h2>
+                  <div className="watchlist__row">
+                    <button className="watchlist__remove">Remove</button>
+                    <button className="watchlist__stats">Stats</button>
+                  </div>
                 </div>
-
-                <h2 className="watchlist__name">{stock.symbol}</h2>
-                <div className="watchlist__row">
-                  <button className="watchlist__remove">Remove</button>
-                  <button className="watchlist__stats">Stats</button>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })}
+          </div>
         </div>
 
         <div className="main-right">

@@ -920,8 +920,8 @@ body {
   color: #fff; }
 
 .watchlist {
-  width: 80%;
-  margin: 2rem auto;
+  width: 40%;
+  margin: 2rem;
   background-color: #2b2b2b;
   box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.2);
   border-radius: 4px;
@@ -938,7 +938,7 @@ body {
     margin: 2rem; }
   .watchlist__row {
     display: flex;
-    justify-content: space-evenly; }
+    flex-direction: column; }
   .watchlist__symbol {
     position: absolute;
     top: -1rem;
@@ -966,16 +966,22 @@ body {
     border-radius: 5px;
     border: none;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 300;
     letter-spacing: 1px;
-    width: 12rem;
+    width: 100%;
     cursor: pointer;
-    transition: 0.2s; }
+    transition: 0.2s;
+    margin-bottom: 1rem; }
   .watchlist__remove:hover {
     background-color: #df4834;
     border-color: #df4834;
     color: #fff; }
+  .watchlist__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto; }
   .watchlist__stats {
     display: block;
     background-color: #3173d4;
@@ -984,12 +990,13 @@ body {
     border-radius: 5px;
     border: none;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 300;
     letter-spacing: 1px;
-    width: 12rem;
+    width: 100%;
     cursor: pointer;
-    transition: 0.2s; }
+    transition: 0.2s;
+    margin-bottom: 1rem; }
   .watchlist__stats:hover {
     background-color: #064fbd; }
 

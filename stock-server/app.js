@@ -61,12 +61,21 @@ app.post("/watchlist", (req, res) => {
   const symbol = req.body.symbol;
   const userid = req.body.userid;
 
-  db.Watchlist.create({
-    userid: userid,
-    symbol: symbol,
+  db.Watchlist.findAll({
+    where: {
+      userid: userid,
+    },
+  }).then((response) => {
+    if (response.length <= 3) {
+      db.Watchlist.create({
+        userid: userid,
+        symbol: symbol,
+      });
+      res.send({ message: "Successfully added" });
+    } else {
+      res.send({ message: "You can only have 4 watchlisted items" });
+    }
   });
-
-  res.send({ message: "Successfully added" });
 });
 
 app.post("/login", (req, res) => {

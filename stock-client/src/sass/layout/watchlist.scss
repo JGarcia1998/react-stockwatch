@@ -23,8 +23,8 @@
 }
 
 .watchlist {
-  width: 80%;
-  margin: 2rem auto;
+  width: 40%;
+  margin: 2rem;
   background-color: rgb(43, 43, 43);
   box-shadow: 0 1rem 1rem rgba(black, 0.2);
   border-radius: 4px;
@@ -44,7 +44,7 @@
 
   &__row {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
   }
 
   &__symbol {
@@ -79,18 +79,26 @@
     border-radius: 5px;
     border: none;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 300;
     letter-spacing: 1px;
-    width: 12rem;
+    width: 100%;
     cursor: pointer;
     transition: 0.2s;
+    margin-bottom: 1rem;
   }
 
   &__remove:hover {
     background-color: rgb(223, 72, 52);
     border-color: rgb(223, 72, 52);
     color: #fff;
+  }
+
+  &__wrap {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: 0 auto;
   }
 
   &__stats {
@@ -101,12 +109,13 @@
     border-radius: 5px;
     border: none;
     outline: none;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 300;
     letter-spacing: 1px;
-    width: 12rem;
+    width: 100%;
     cursor: pointer;
     transition: 0.2s;
+    margin-bottom: 1rem;
   }
 
   &__stats:hover {
