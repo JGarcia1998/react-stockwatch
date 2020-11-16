@@ -60,7 +60,6 @@ app.get("/user-watchlist/:id", (req, res) => {
 app.post("/remove-item/:id", (req, res) => {
   const userid = req.params.id;
   const itemToDelete = req.body.item;
-  console.log("hi");
 
   db.Watchlist.destroy({
     where: {

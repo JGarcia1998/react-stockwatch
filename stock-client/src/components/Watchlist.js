@@ -5,6 +5,8 @@ import Navbar from "./Navbar";
 
 function Watchlist(props) {
   const [watchlist, setWatchlist] = useState([]);
+  const [showPopup, setShowPopup] = useState(false);
+  const [stockInfo, setStockInfo] = useState(null);
 
   useEffect(() => {
     if (props.currId !== null && props.userAuth === true) {
@@ -19,7 +21,38 @@ function Watchlist(props) {
           console.error(err);
         });
     }
-  }, [setWatchlist]);
+  }, [setWatchlist, props.currId, props.userAuth]);
+
+  const statPopup = (symbol) => {
+    if (showPopup === false) {
+      setShowPopup(true);
+    }
+
+    fetch(
+      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=LTTSRB12RXT9ZBDH`
+    )
+      .then((res) => res.json())
+      .then((result) => {
+        const weirdJsonFromApi = result["Time Series (Daily)"];
+        const todaysValue = Object.values(weirdJsonFromApi)[0];
+
+        const newValue = Object.values(todaysValue);
+
+        const open = newValue[0];
+        const high = newValue[1];
+        const low = newValue[2];
+        const close = newValue[3];
+        const volume = newValue[4];
+
+        setStockInfo({
+          high: high,
+          open: open,
+          low: low,
+          close: close,
+          volume: volume,
+        });
+      });
+  };
 
   const removeItem = (item) => {
     fetch("http://localhost:1234/remove-item/" + props.currId, {
@@ -38,12 +71,47 @@ function Watchlist(props) {
       });
   };
 
+  const closePopup = () => {
+    setShowPopup(false);
+    setStockInfo(null);
+  };
+
   return (
     <>
       <div className="main-body">
         <Navbar></Navbar>
 
         <div className="header">
+          {stockInfo !== null ? (
+            <div
+              className={showPopup === true ? "stat-popup" : "stat-popup-none"}
+            >
+              <button onClick={closePopup} className="stat-popup__btn">
+                X
+              </button>
+              <h2 className="stat-popup__title">Stats for AAPL</h2>
+
+              <div className="stat-popup__container">
+                <div className="stat-popup__row">
+                  <span className="stat-popup__atr">High:</span>
+                  <span className="stat-popup__info">{stockInfo.high}</span>
+                  <span className="stat-popup__atr">Low:</span>
+                  <span className="stat-popup__info">{stockInfo.low}</span>
+                </div>
+
+                <div className="stat-popup__row">
+                  <span className="stat-popup__atr">Open:</span>
+                  <span className="stat-popup__info">{stockInfo.open}</span>
+                  <span className="stat-popup__atr">Close:</span>
+                  <span className="stat-popup__info">{stockInfo.close}</span>
+                </div>
+
+                <div className="stat-popup__volume-name">Volume</div>
+
+                <div className="stat-popup__volume">{stockInfo.volume}</div>
+              </div>
+            </div>
+          ) : null}
           {props.currId !== null ? (
             <div className="display-amount">{watchlist.length} / 4 </div>
           ) : null}
@@ -75,7 +143,12 @@ function Watchlist(props) {
                     >
                       Remove
                     </button>
-                    <button className="watchlist__stats">Stats</button>
+                    <button
+                      onClick={() => statPopup(stock.symbol)}
+                      className="watchlist__stats"
+                    >
+                      Stats
+                    </button>
                   </div>
                 </div>
               );

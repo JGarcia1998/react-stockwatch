@@ -1007,3 +1007,51 @@ body {
   100% {
     opacity: 1;
     transform: translateX(0); } }
+
+.stat-popup-none {
+  display: none; }
+
+.stat-popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40vw;
+  border-radius: 4px;
+  background-image: linear-gradient(to bottom, #005c97, #363795);
+  padding: 1rem 4rem;
+  z-index: 500; }
+  .stat-popup__title {
+    text-align: center;
+    font-size: 3rem;
+    color: #fdfdfd;
+    font-weight: 500;
+    letter-spacing: 1px; }
+  .stat-popup__btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: transparent;
+    color: black;
+    font-weight: 500;
+    font-size: 2rem;
+    cursor: pointer;
+    border: none;
+    outline: none; }
+  .stat-popup__container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    font-size: 1.8rem;
+    color: #d4d4d4; }
+  .stat-popup__row {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    margin: 1rem 0; }
+  .stat-popup__volume-name {
+    text-decoration: underline;
+    margin-top: 2rem;
+    font-size: 1.8rem;
+    letter-spacing: 1px; }
