@@ -33,6 +33,7 @@ function TopStocks(props) {
 
   const closePopUp = () => {
     setShowPopup(false);
+    setStockUpdate([]);
   };
 
   return (

@@ -28,6 +28,7 @@ export default function StockNews() {
   };
   const closePopUp = () => {
     setShowPopup(false);
+    setStockUpdate([]);
   };
 
   return (

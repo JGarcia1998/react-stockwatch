@@ -38,6 +38,7 @@ function Login(props) {
       .then((result) => {
         if (result.login === true) {
           props.onSetAuthenticated();
+          props.onSetUserId(result.id);
         } else {
           alert("Login incorrect");
         }
@@ -125,6 +126,13 @@ const mapDispatchToProps = (dispatch) => {
         type: "SETAUTHENTICATED",
         value: true,
       }),
+
+    onSetUserId: (id) => {
+      dispatch({
+        type: "SETID",
+        value: id,
+      });
+    },
   };
 };
 

@@ -10,6 +10,8 @@ const initialState = {
   },
 
   authenticated: false,
+
+  userId: null,
 };
 
 const reducer = (state = initialState, action) => {
@@ -27,6 +29,11 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       authenticated: action.value,
+    };
+  } else if (action.type == "SETID") {
+    return {
+      ...state,
+      userId: action.value,
     };
   }
   return state;

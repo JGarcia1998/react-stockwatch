@@ -40,6 +40,35 @@ app.post("/create-account", (req, res) => {
   res.send({ message: "Account created successfully" });
 });
 
+app.get("/user-watchlist/:id", (req, res) => {
+  const userid = req.params.id;
+  db.Watchlist.findAll({
+    where: {
+      userid: userid,
+    },
+  })
+    .then((stocks) => {
+      if (stocks) {
+        res.send({ watchlist: stocks });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
+
+app.post("/watchlist", (req, res) => {
+  const symbol = req.body.symbol;
+  const userid = req.body.userid;
+
+  db.Watchlist.create({
+    userid: userid,
+    symbol: symbol,
+  });
+
+  res.send({ message: "Successfully added" });
+});
+
 app.post("/login", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;

@@ -8,6 +8,8 @@ import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 
 function Reusable(props) {
+  const [showPopup, setShowPopup] = useState(false);
+  const [stockUpdate, setStockUpdate] = useState([]);
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
@@ -15,10 +17,67 @@ function Reusable(props) {
       },
     },
   }));
+
+  const showPopupFunc = (e) => {
+    if (showPopup === false) {
+      setShowPopup(true);
+    }
+
+    let search = e.target.dataset.name;
+
+    if (search != undefined) {
+      fetch(
+        `https://newsapi.org/v2/everything?q=${search}&apiKey=` +
+          process.env.REACT_APP_KEY
+      )
+        .then((res) => res.json())
+        .then((results) => {
+          setStockUpdate(results.articles);
+        });
+    }
+  };
+
+  const closePopUp = () => {
+    setShowPopup(false);
+    setStockUpdate([]);
+  };
   const classes = useStyles();
 
   return (
     <>
+      <div className={showPopup === true ? "news-popup" : "news-popup-false"}>
+        <button onClick={closePopUp} className="news-close">
+          X
+        </button>
+
+        {stockUpdate.splice(0, 3).map((article) => {
+          return (
+            <div className="stock-updates">
+              <img
+                src={article.urlToImage}
+                className="stock-updates__img"
+                alt="News Image"
+              />
+              <div className="stock-updates__col">
+                <h2 className="news__title">{article.title}</h2>
+                <p className="news__info">{article.content}</p>
+                <Button
+                  style={{
+                    width: "30%",
+                    margin: "1rem 0",
+                    alignSelf: "flex-start",
+                  }}
+                  variant="contained"
+                  color="primary"
+                  href="#"
+                >
+                  Article
+                </Button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
       <div className="main-body">
         <Navbar></Navbar>
 
@@ -30,9 +89,15 @@ function Reusable(props) {
 
           <div className="crypto">
             <div className="crypto__container">
-              <a href="#" className="header__stock-news special">
-                <div className="header__stock-news-word">News</div>
-              </a>
+              <div
+                onClick={showPopupFunc}
+                className="header__stock-news special"
+                data-name="bitcoin"
+              >
+                <div data-name="bitcoin" className="header__stock-news-word">
+                  News
+                </div>
+              </div>
               <h2 className="crypto__stats">Stats</h2>
               <div className="crypto__grid">
                 <div className="crypto__row">
@@ -59,9 +124,15 @@ function Reusable(props) {
             </div>
 
             <div className="crypto__container">
-              <a href="#" className="header__stock-news special">
-                <div className="header__stock-news-word">News</div>
-              </a>
+              <div
+                onClick={showPopupFunc}
+                className="header__stock-news special"
+                data-name="litecoin"
+              >
+                <div data-name="litecoin" className="header__stock-news-word">
+                  News
+                </div>
+              </div>
               <h2 className="crypto__stats">Stats</h2>
               <div className="crypto__grid">
                 <div className="crypto__row">
@@ -88,9 +159,15 @@ function Reusable(props) {
             </div>
 
             <div className="crypto__container">
-              <a href="#" className="header__stock-news special">
-                <div className="header__stock-news-word">News</div>
-              </a>
+              <div
+                onClick={showPopupFunc}
+                className="header__stock-news special"
+                data-name="etherum"
+              >
+                <div data-name="etherum" className="header__stock-news-word">
+                  News
+                </div>
+              </div>
               <h2 className="crypto__stats">Stats</h2>
               <div className="crypto__grid">
                 <div className="crypto__row">
@@ -117,9 +194,18 @@ function Reusable(props) {
             </div>
 
             <div className="crypto__container">
-              <a href="#" className="header__stock-news special">
-                <div className="header__stock-news-word">News</div>
-              </a>
+              <div
+                onClick={showPopupFunc}
+                className="header__stock-news special"
+                data-name="bitcoincash"
+              >
+                <div
+                  data-name="bitcoincash"
+                  className="header__stock-news-word"
+                >
+                  News
+                </div>
+              </div>
               <h2 className="crypto__stats">Stats</h2>
               <div className="crypto__grid">
                 <div className="crypto__row">
@@ -152,8 +238,8 @@ function Reusable(props) {
             <h2 className="crypto__right-title">Information</h2>
             <p className="crypto__right-text">
               Here you can find the top 4 cypto currencies including Bitcoin,
-              Litecoin, Bitcoin Cash, and Etherum. Each currency is updated
-              everyday at market close(3pm)
+              Litecoin, Bitcoin Cash, and Etherum. The news button will display
+              a few recent articles related to that curency.
             </p>
           </div>
         </div>

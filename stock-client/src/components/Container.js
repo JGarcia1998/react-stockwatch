@@ -28,6 +28,27 @@ function Container(props) {
   //       });
   //   }, [setNews]);
 
+  const watchlistDB = () => {
+    if (props.currId === null) {
+      alert("You need to log in first");
+    } else {
+      fetch("http://localhost:1234/watchlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: props.currId,
+          symbol: props.selectedStock.name,
+        }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          alert(result.message);
+        });
+    }
+  };
+
   return (
     <>
       <div className="main-body">
@@ -113,7 +134,7 @@ function Container(props) {
           </div>
         </div>
 
-        <button className="btn-fixed"></button>
+        <button onClick={watchlistDB} className="btn-fixed"></button>
       </div>
     </>
   );
@@ -122,6 +143,7 @@ function Container(props) {
 const mapStateToProps = (state) => {
   return {
     selectedStock: state.selectedStock,
+    currId: state.userId,
   };
 };
 

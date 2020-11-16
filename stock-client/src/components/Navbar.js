@@ -31,15 +31,13 @@ function Navbar(props) {
         <div className="navbar__label">Dashboard</div>
       </NavLink>
 
-      {props.currUser === true ? (
-        <NavLink to="/watchlist" className="navbar__icon">
-          <div className="navbar__effect"></div>
-          <AddShoppingCartRoundedIcon
-            style={{ fontSize: 30, zIndex: 250, color: "black" }}
-          ></AddShoppingCartRoundedIcon>
-          <div className="navbar__label">Watchlist</div>
-        </NavLink>
-      ) : null}
+      <NavLink to="/watchlist" className="navbar__icon">
+        <div className="navbar__effect"></div>
+        <AddShoppingCartRoundedIcon
+          style={{ fontSize: 30, zIndex: 250, color: "black" }}
+        ></AddShoppingCartRoundedIcon>
+        <div className="navbar__label">Watchlist</div>
+      </NavLink>
 
       <NavLink to="/" className="navbar__icon">
         <div className="navbar__effect"></div>
