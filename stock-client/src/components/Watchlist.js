@@ -21,6 +21,23 @@ function Watchlist(props) {
     }
   }, [setWatchlist]);
 
+  const removeItem = (item) => {
+    fetch("http://localhost:1234/remove-item/" + props.currId, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ item: item }),
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setWatchlist(result.watchlist);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  };
+
   return (
     <>
       <div className="main-body">
@@ -52,7 +69,12 @@ function Watchlist(props) {
 
                   <h2 className="watchlist__name">{stock.symbol}</h2>
                   <div className="watchlist__row">
-                    <button className="watchlist__remove">Remove</button>
+                    <button
+                      onClick={() => removeItem(stock.symbol)}
+                      className="watchlist__remove"
+                    >
+                      Remove
+                    </button>
                     <button className="watchlist__stats">Stats</button>
                   </div>
                 </div>
