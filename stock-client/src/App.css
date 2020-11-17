@@ -616,10 +616,10 @@ body {
   .news-popup-false {
     display: none; }
   .news__img {
-    height: 100%;
-    width: 30%;
-    object-fit: cover;
-    border-radius: 4px; }
+    width: 35%;
+    background-size: cover;
+    border-radius: 4px;
+    object-fit: cover; }
   .news__title {
     color: #fff;
     font-size: 2rem;
@@ -1050,8 +1050,16 @@ body {
     display: flex;
     justify-content: space-evenly;
     margin: 1rem 0; }
+  .stat-popup__atr {
+    font-style: italic;
+    color: #fff; }
+  .stat-popup__date {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: #08f572; }
   .stat-popup__volume-name {
-    text-decoration: underline;
+    color: white;
     margin-top: 2rem;
     font-size: 1.8rem;
     letter-spacing: 1px; }

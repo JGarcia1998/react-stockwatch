@@ -188,11 +188,21 @@
     margin: 1rem 0;
   }
 
-  &__volume {
+  &__atr {
+    font-style: italic;
+    color: #fff;
+  }
+
+  &__date {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: rgb(8, 245, 114);
   }
 
   &__volume-name {
-    text-decoration: underline;
+    color: rgb(255, 255, 255);
+
     margin-top: 2rem;
     font-size: 1.8rem;
     letter-spacing: 1px;

@@ -64,10 +64,10 @@
   }
 
   &__img {
-    height: 100%;
-    width: 30%;
-    object-fit: cover;
+    width: 35%;
+    background-size: cover;
     border-radius: 4px;
+    object-fit: cover;
   }
 
   &__title {

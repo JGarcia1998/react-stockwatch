@@ -34,23 +34,25 @@ function Watchlist(props) {
       .then((res) => res.json())
       .then((result) => {
         const weirdJsonFromApi = result["Time Series (Daily)"];
+        const date = Object.keys(weirdJsonFromApi)[0];
         const todaysValue = Object.values(weirdJsonFromApi)[0];
-
         const newValue = Object.values(todaysValue);
-
         const open = newValue[0];
         const high = newValue[1];
         const low = newValue[2];
         const close = newValue[3];
         const volume = newValue[4];
 
-        setStockInfo({
-          high: high,
-          open: open,
-          low: low,
-          close: close,
-          volume: volume,
-        });
+        if (result) {
+          setStockInfo({
+            date: date,
+            high: high,
+            open: open,
+            low: low,
+            close: close,
+            volume: volume,
+          });
+        }
       });
   };
 
@@ -89,26 +91,30 @@ function Watchlist(props) {
               <button onClick={closePopup} className="stat-popup__btn">
                 X
               </button>
+
+              <p className="stat-popup__date">as of {stockInfo.date}</p>
               <h2 className="stat-popup__title">Stats for AAPL</h2>
 
               <div className="stat-popup__container">
                 <div className="stat-popup__row">
                   <span className="stat-popup__atr">High:</span>
-                  <span className="stat-popup__info">{stockInfo.high}</span>
+                  <span className="stat-popup__info">${stockInfo.high}</span>
                   <span className="stat-popup__atr">Low:</span>
-                  <span className="stat-popup__info">{stockInfo.low}</span>
+                  <span className="stat-popup__info">${stockInfo.low}</span>
                 </div>
 
                 <div className="stat-popup__row">
                   <span className="stat-popup__atr">Open:</span>
-                  <span className="stat-popup__info">{stockInfo.open}</span>
+                  <span className="stat-popup__info">${stockInfo.open}</span>
                   <span className="stat-popup__atr">Close:</span>
-                  <span className="stat-popup__info">{stockInfo.close}</span>
+                  <span className="stat-popup__info">${stockInfo.close}</span>
                 </div>
 
                 <div className="stat-popup__volume-name">Volume</div>
 
-                <div className="stat-popup__volume">{stockInfo.volume}</div>
+                <div className="stat-popup__volume">
+                  {stockInfo.volume} shares
+                </div>
               </div>
             </div>
           ) : null}

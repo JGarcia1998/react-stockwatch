@@ -18,15 +18,16 @@ function Container(props) {
   const classes = useStyles();
   const [news, setNews] = useState([]);
 
-  //   useEffect(() => {
-  //     fetch(
-  //       `https://newsapi.org/v2/top-headlines?country=us?category=business?&apiKey=${process.env.REACT_APP_KEY}`
-  //     )
-  //       .then((response) => response.json())
-  //       .then((result) => {
-  //         setNews(result.articles);
-  //       });
-  //   }, [setNews]);
+  // useEffect(() => {
+  //   fetch(
+  //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_KEY}`
+  //   )
+  //     .then((response) => response.json())
+  //     .then((result) => {
+  //       console.log(result.articles);
+  //       setNews(result.articles);
+  //     });
+  // }, [setNews]);
 
   const watchlistDB = () => {
     if (props.currId === null) {
@@ -68,7 +69,9 @@ function Container(props) {
 
           <h2 className="header__news-title">News articles around the globe</h2>
 
-          {/* {news.splice(0, 6).map((article) => {
+          {/* {news.splice(0, 5).map((article) => {
+            const link = article.url;
+
             return (
               <div className="news">
                 <img
@@ -87,7 +90,7 @@ function Container(props) {
                     }}
                     variant="contained"
                     color="primary"
-                    href="#"
+                    href={link}
                   >
                     Article
                   </Button>

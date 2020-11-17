@@ -39,6 +39,7 @@ export default function StockNews() {
         </button>
 
         {stockUpdate.splice(0, 4).map((article) => {
+          const link = article.url;
           return (
             <div className="stock-updates">
               <img
@@ -57,7 +58,7 @@ export default function StockNews() {
                   }}
                   variant="contained"
                   color="primary"
-                  href="#"
+                  href={link}
                 >
                   Article
                 </Button>

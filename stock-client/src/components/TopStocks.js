@@ -6,11 +6,59 @@ function TopStocks(props) {
   const [showPopup, setShowPopup] = useState(false);
   const [stockUpdate, setStockUpdate] = useState([]);
   const [prevStock, setPrevStock] = useState(null);
+  const [stockInfo, setStockInfo] = useState([]);
+
+  const symbols = ["AAPL", "NFLX", "GOOGL", "TSLA"];
+
+  useEffect(() => {
+    fetchSymbols();
+  }, []);
 
   const changeStock = (e) => {
     setPrevStock(props.selectedStock);
     props.onSetSelectedStock(e);
   };
+
+  async function fetchSymbols() {
+    for (let i = 0; i < symbols.length; i++) {
+      await fetch(
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&apikey=LTTSRB12RXT9ZBDH`
+      )
+        .then((res) => res.json())
+        .then((allStocks) => {
+          console.log(allStocks);
+          try {
+            let metaDataEntries = allStocks["Meta Data"];
+            let symbol = metaDataEntries["2. Symbol"].toUpperCase();
+            let pastDataEntries = allStocks["Time Series (Daily)"];
+            let pastDataValues = Object.values(pastDataEntries);
+            let mostRecentValue = pastDataValues[0];
+            let x = Object.values(mostRecentValue);
+            let open = parseFloat(x[0]).toFixed(2);
+            let high = parseFloat(x[1]).toFixed(2);
+            let low = parseFloat(x[2]).toFixed(2);
+            let close = parseFloat(x[3]).toFixed(2);
+
+            let percentage = close - open;
+            let result = parseFloat(percentage).toFixed(2);
+
+            let temp = [...stockInfo];
+            temp.push({
+              symbol: symbol,
+              high: high,
+              low: low,
+              close: close,
+              open: open,
+              percentage: result,
+            });
+
+            setStockInfo(temp);
+          } catch {
+            console.log("surpassed the limit of 4 requests in under a minute");
+          }
+        });
+    }
+  }
 
   const showPopupFunc = (e) => {
     if (showPopup === false) {
@@ -95,16 +143,24 @@ function TopStocks(props) {
             <div className="header__flex-col">
               <div className="header__flex-row">
                 <span className="header__grid-title">High:</span>
-                <span className="header__grid-price">$495.85</span>
+                <span className="header__grid-price">
+                  ${stockInfo[0]?.high ? stockInfo[0].high : "loading"}
+                </span>
                 <span className="header__grid-title">Low:</span>
-                <span className="header__grid-price">$467.26</span>
+                <span className="header__grid-price">
+                  ${stockInfo[0]?.low ? stockInfo[0].low : "loading"}
+                </span>
               </div>
 
               <div className="header__flex-row">
                 <span className="header__grid-title">Open:</span>
-                <span className="header__grid-price">$495.85</span>
+                <span className="header__grid-price">
+                  ${stockInfo[0]?.open ? stockInfo[0].open : "loading"}
+                </span>
                 <span className="header__grid-title">Close:</span>
-                <span className="header__grid-price">$467.26</span>
+                <span className="header__grid-price">
+                  ${stockInfo[0]?.close ? stockInfo[0].close : "loading"}
+                </span>
               </div>
             </div>
 
@@ -112,7 +168,9 @@ function TopStocks(props) {
               <span className="header__icon-1-symbol">A</span>
             </div>
             <p className="header__stock-title">AAPL</p>
-            <p className="header__stock-price">15%</p>
+            <p className="header__stock-price">
+              {stockInfo[0]?.percentage ? stockInfo[0].percentage : "loading"}%
+            </p>
           </div>
           {/* </DragDropContainer> */}
 
@@ -133,23 +191,33 @@ function TopStocks(props) {
             <div className="header__flex-col">
               <div className="header__flex-row">
                 <span className="header__grid-title">High:</span>
-                <span className="header__grid-price">$495.85</span>
+                <span className="header__grid-price">
+                  ${stockInfo[1]?.high ? stockInfo[1].high : "loading"}
+                </span>
                 <span className="header__grid-title">Low:</span>
-                <span className="header__grid-price">$467.26</span>
+                <span className="header__grid-price">
+                  ${stockInfo[1]?.low ? stockInfo[1].low : "loading"}
+                </span>
               </div>
 
               <div className="header__flex-row">
                 <span className="header__grid-title">Open:</span>
-                <span className="header__grid-price">$495.85</span>
+                <span className="header__grid-price">
+                  ${stockInfo[1]?.open ? stockInfo[1].open : "loading"}
+                </span>
                 <span className="header__grid-title">Close:</span>
-                <span className="header__grid-price">$467.26</span>
+                <span className="header__grid-price">
+                  ${stockInfo[1]?.close ? stockInfo[1].close : "loading"}
+                </span>
               </div>
             </div>
             <div className="header__icon-2">
               <span className="header__icon-2-symbol">N</span>
             </div>
             <p className="header__stock-title">NFLX</p>
-            <p className="header__stock-price">12%</p>
+            <p className="header__stock-price">
+              {stockInfo[1]?.percentage ? stockInfo[1].percentage : "loading"}%
+            </p>
           </div>
         </div>
 
@@ -173,16 +241,24 @@ function TopStocks(props) {
             <div className="header__flex-col">
               <div className="header__flex-row">
                 <span className="header__grid-title">High:</span>
-                <span className="header__grid-price">$495.85</span>
+                <span className="header__grid-price">
+                  ${stockInfo[2]?.high ? stockInfo[2].high : "loading"}
+                </span>
                 <span className="header__grid-title">Low:</span>
-                <span className="header__grid-price">$467.26</span>
+                <span className="header__grid-price">
+                  ${stockInfo[2]?.low ? stockInfo[2].low : "loading"}
+                </span>
               </div>
 
               <div className="header__flex-row">
                 <span className="header__grid-title">Open:</span>
-                <span className="header__grid-price">$495.85</span>
+                <span className="header__grid-price">
+                  ${stockInfo[2]?.open ? stockInfo[2].open : "loading"}
+                </span>
                 <span className="header__grid-title">Close:</span>
-                <span className="header__grid-price">$467.26</span>
+                <span className="header__grid-price">
+                  ${stockInfo[2]?.close ? stockInfo[2].close : "loading"}
+                </span>
               </div>
             </div>
 
@@ -190,7 +266,9 @@ function TopStocks(props) {
               <span className="header__icon-3-symbol">G</span>
             </div>
             <p className="header__stock-title">GOOGL</p>
-            <p className="header__stock-price">9%</p>
+            <p className="header__stock-price">
+              {stockInfo[2]?.percentage ? stockInfo[2].percentage : "loading"}%
+            </p>
           </div>
 
           <div data-name="tesla" className="header__stock">
@@ -212,16 +290,24 @@ function TopStocks(props) {
             <div className="header__flex-col">
               <div className="header__flex-row">
                 <span className="header__grid-title">High:</span>
-                <span className="header__grid-price">$495.85</span>
+                <span className="header__grid-price">
+                  ${stockInfo[3]?.high ? stockInfo[3].high : "loading"}
+                </span>
                 <span className="header__grid-title">Low:</span>
-                <span className="header__grid-price">$467.26</span>
+                <span className="header__grid-price">
+                  ${stockInfo[3]?.low ? stockInfo[3].low : "loading"}
+                </span>
               </div>
 
               <div className="header__flex-row">
                 <span className="header__grid-title">Open:</span>
-                <span className="header__grid-price">$495.85</span>
+                <span className="header__grid-price">
+                  ${stockInfo[3]?.open ? stockInfo[3].open : "loading"}
+                </span>
                 <span className="header__grid-title">Close:</span>
-                <span className="header__grid-price">$467.26</span>
+                <span className="header__grid-price">
+                  ${stockInfo[3]?.close ? stockInfo[3].close : "loading"}
+                </span>
               </div>
             </div>
 
@@ -229,7 +315,9 @@ function TopStocks(props) {
               <span className="header__icon-4-symbol">T</span>
             </div>
             <p className="header__stock-title">TSLA</p>
-            <p className="header__stock-price">3%</p>
+            <p className="header__stock-price">
+              {stockInfo[3]?.percentage ? stockInfo[3].percentage : "loading"}%
+            </p>
           </div>
         </div>
       </div>
