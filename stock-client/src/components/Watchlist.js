@@ -29,7 +29,7 @@ function Watchlist(props) {
     }
 
     fetch(
-      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=LTTSRB12RXT9ZBDH`
+      `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbol}&apikey=${process.env.REACT_APP_STOCK}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -137,7 +137,7 @@ function Watchlist(props) {
           ) : null}
           <div className="watchlist__wrap">
             {watchlist.map((stock, index) => {
-              let symbol = stock.symbol.split("")[0];
+              let symbol = stock.symbol?.split("")[0];
               return (
                 <div key={index} className="watchlist">
                   <div className="watchlist__symbol">
