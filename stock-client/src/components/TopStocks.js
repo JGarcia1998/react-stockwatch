@@ -114,9 +114,9 @@ function TopStocks(props) {
           X
         </button>
 
-        {stockUpdate.splice(0, 3).map((article) => {
+        {stockUpdate.splice(0, 3).map((article, index) => {
           return (
-            <div className="stock-updates">
+            <div key={index} className="stock-updates">
               <img
                 src={article.urlToImage}
                 className="stock-updates__img"
@@ -133,7 +133,8 @@ function TopStocks(props) {
                   }}
                   variant="contained"
                   color="primary"
-                  href="#"
+                  href={article.url}
+                  target="__blank"
                 >
                   Article
                 </Button>

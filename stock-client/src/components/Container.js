@@ -18,16 +18,16 @@ function Container(props) {
   const classes = useStyles();
   const [news, setNews] = useState([]);
 
-  // useEffect(() => {
-  //   fetch(
-  //     `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_KEY}`
-  //   )
-  //     .then((response) => response.json())
-  //     .then((result) => {
-  //       console.log(result.articles);
-  //       setNews(result.articles);
-  //     });
-  // }, [setNews]);
+  useEffect(() => {
+    fetch(
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_KEY}`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result.articles);
+        props.setNews(result.articles.splice(0, 5));
+      });
+  }, [props.setNews]);
 
   const watchlistDB = () => {
     if (props.currId === null) {
@@ -69,15 +69,15 @@ function Container(props) {
 
           <h2 className="header__news-title">News articles around the globe</h2>
 
-          {/* {news.splice(0, 5).map((article) => {
+          {props.news.map((article, index) => {
             const link = article.url;
 
             return (
-              <div className="news">
+              <div key={index} className="news">
                 <img
                   src={article.urlToImage}
                   className="news__img"
-                  alt="News Image"
+                  alt="News"
                 />
                 <div className="news__col">
                   <h2 className="news__title">{article.title}</h2>
@@ -91,13 +91,14 @@ function Container(props) {
                     variant="contained"
                     color="primary"
                     href={link}
+                    target="__blank"
                   >
                     Article
                   </Button>
                 </div>
               </div>
             );
-          })} */}
+          })}
         </div>
 
         <div className="main-right">
@@ -159,7 +160,18 @@ const mapStateToProps = (state) => {
   return {
     selectedStock: state.selectedStock,
     currId: state.userId,
+    news: state.news,
   };
 };
 
-export default connect(mapStateToProps)(Container);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setNews: (info) =>
+      dispatch({
+        type: "SETNEWS",
+        value: info,
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

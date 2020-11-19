@@ -11,40 +11,44 @@ function Reusable(props) {
   const [showPopup, setShowPopup] = useState(false);
   const [stockUpdate, setStockUpdate] = useState([]);
 
-  const symbols = ["BSV", "LTC", "ETH", "BCH"];
+  const symbols = ["BTC", "LTC", "ETH", "BCH"];
   let temp = [];
 
   useEffect(() => {
     if (props.seeCrypto === false) {
       fetchSymbols();
     }
-  }, []);
+  }, [props.cryptoInfo]);
 
   async function fetchSymbols() {
     props.onSetCrypto();
 
     for (let i = 0; i < symbols.length; i++) {
       await fetch(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&apikey=LTTSRB12RXT9ZBDH`
+        `https://www.alphavantage.co/query?function=DIGITAL_CURRENCY_DAILY&symbol=${symbols[i]}&market=CNY&apikey=${process.env.REACT_APP_STOCK}`
       )
         .then((res) => res.json())
         .then((allStocks) => {
-          console.log(allStocks);
           try {
-            let metaDataEntries = allStocks["Meta Data"];
-            let symbol = metaDataEntries["2. Symbol"].toUpperCase();
-            let pastDataEntries = allStocks["Time Series (Daily)"];
+            let pastDataEntries =
+              allStocks["Time Series (Digital Currency Daily)"];
+
             let pastDataValues = Object.values(pastDataEntries);
+
             let mostRecentValue = pastDataValues[0];
+
             let x = Object.values(mostRecentValue);
-            let open = parseFloat(x[0]).toFixed(2);
-            let high = parseFloat(x[1]).toFixed(2);
-            let low = parseFloat(x[2]).toFixed(2);
-            let close = parseFloat(x[3]).toFixed(2);
-            let colorToSend;
+
+            let open = parseFloat(x[1]).toFixed(2);
+            let high = parseFloat(x[3]).toFixed(2);
+            let low = parseFloat(x[5]).toFixed(2);
+            let close = parseFloat(x[7]).toFixed(2);
+
             let change = close - open;
             let percentage = (change / close) * 100;
             let result = parseFloat(percentage).toFixed(2);
+
+            let colorToSend;
 
             if (percentage < 0) {
               colorToSend = "red";
@@ -53,7 +57,6 @@ function Reusable(props) {
             }
 
             temp.push({
-              symbol: symbol,
               high: high,
               low: low,
               close: close,
@@ -129,7 +132,8 @@ function Reusable(props) {
                   }}
                   variant="contained"
                   color="primary"
-                  href="#"
+                  href={article.url}
+                  target="__blank"
                 >
                   Article
                 </Button>
@@ -212,7 +216,7 @@ function Reusable(props) {
                   : "loading"}
                 %
               </div>
-              <span className="crypto__name">Bitcoin SV</span>
+              <span className="crypto__name">Bitcoin</span>
             </div>
 
             <div className="crypto__container">

@@ -10,16 +10,15 @@ import GraphicEqRoundedIcon from "@material-ui/icons/GraphicEqRounded";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 
 function Navbar(props) {
-  const [showCrpyto, setShowCrypto] = useState(null);
   const logOut = () => {
     props.onLogOut();
   };
 
   useEffect(() => {
     setTimeout(function () {
-      setShowCrypto(true);
+      props.onSetShowCrypto();
     }, 60000);
-  });
+  }, []);
 
   return (
     <div className="navbar">
@@ -55,7 +54,7 @@ function Navbar(props) {
         <div className="navbar__label">Stocks</div>
       </NavLink>
 
-      {showCrpyto === true ? (
+      {props.showCrypto === true ? (
         <NavLink to="/crypto" className="navbar__icon">
           <div className="navbar__effect"></div>
           <GraphicEqRoundedIcon
@@ -89,6 +88,7 @@ function Navbar(props) {
 const mapStateToProps = (state) => {
   return {
     currUser: state.authenticated,
+    showCrypto: state.showCrypto,
   };
 };
 
@@ -98,6 +98,13 @@ const mapDispatchToProps = (dispatch) => {
       dispatch({
         type: "SETLOGOUT",
         value: false,
+      });
+    },
+
+    onSetShowCrypto: () => {
+      dispatch({
+        type: "SETSHOWCRYPTO",
+        value: true,
       });
     },
   };

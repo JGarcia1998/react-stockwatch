@@ -45,6 +45,7 @@ function Watchlist(props) {
 
         if (result) {
           setStockInfo({
+            symbol: symbol,
             date: date,
             high: high,
             open: open,
@@ -93,7 +94,9 @@ function Watchlist(props) {
               </button>
 
               <p className="stat-popup__date">as of {stockInfo.date}</p>
-              <h2 className="stat-popup__title">Stats for AAPL</h2>
+              <h2 className="stat-popup__title">
+                Stats for {stockInfo.symbol}
+              </h2>
 
               <div className="stat-popup__container">
                 <div className="stat-popup__row">
@@ -133,10 +136,10 @@ function Watchlist(props) {
             <p className="header__p">Here are all of your saved stocks</p>
           ) : null}
           <div className="watchlist__wrap">
-            {watchlist.map((stock) => {
+            {watchlist.map((stock, index) => {
               let symbol = stock.symbol.split("")[0];
               return (
-                <div className="watchlist">
+                <div key={index} className="watchlist">
                   <div className="watchlist__symbol">
                     <span className="watchlist__ltr">{symbol}</span>
                   </div>

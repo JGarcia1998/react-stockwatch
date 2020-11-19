@@ -6,6 +6,8 @@ const initialState = {
   stockInfo: [],
   cryptosSet: false,
   cryptoInfo: [],
+  showCrypto: null,
+  news: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -53,6 +55,16 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       cryptosSet: action.value,
+    };
+  } else if (action.type == "SETSHOWCRYPTO") {
+    return {
+      ...state,
+      showCrypto: action.value,
+    };
+  } else if (action.type == "SETNEWS") {
+    return {
+      ...state,
+      news: action.value,
     };
   }
   return state;
