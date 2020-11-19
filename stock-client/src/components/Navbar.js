@@ -1,4 +1,5 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@material-ui/core";
 import { NavLink, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
@@ -9,9 +10,16 @@ import GraphicEqRoundedIcon from "@material-ui/icons/GraphicEqRounded";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 
 function Navbar(props) {
+  const [showCrpyto, setShowCrypto] = useState(null);
   const logOut = () => {
     props.onLogOut();
   };
+
+  useEffect(() => {
+    setTimeout(function () {
+      setShowCrypto(true);
+    }, 60000);
+  });
 
   return (
     <div className="navbar">
@@ -47,13 +55,15 @@ function Navbar(props) {
         <div className="navbar__label">Stocks</div>
       </NavLink>
 
-      <NavLink to="/crypto" className="navbar__icon">
-        <div className="navbar__effect"></div>
-        <GraphicEqRoundedIcon
-          style={{ fontSize: 30, zIndex: 250, color: "black" }}
-        ></GraphicEqRoundedIcon>
-        <div className="navbar__label">Crypto</div>
-      </NavLink>
+      {showCrpyto === true ? (
+        <NavLink to="/crypto" className="navbar__icon">
+          <div className="navbar__effect"></div>
+          <GraphicEqRoundedIcon
+            style={{ fontSize: 30, zIndex: 250, color: "black" }}
+          ></GraphicEqRoundedIcon>
+          <div className="navbar__label">Crypto</div>
+        </NavLink>
+      ) : null}
 
       {props.currUser === true ? (
         <NavLink onClick={logOut} to="/login" className="navbar__icon">

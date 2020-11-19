@@ -4,6 +4,8 @@ const initialState = {
   userId: null,
   stocksSet: false,
   stockInfo: [],
+  cryptosSet: false,
+  cryptoInfo: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -41,6 +43,16 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       stockInfo: action.value,
+    };
+  } else if (action.type == "SETCRYPTOINFO") {
+    return {
+      ...state,
+      cryptoInfo: action.value,
+    };
+  } else if (action.type == "SETCRYPTO") {
+    return {
+      ...state,
+      cryptosSet: action.value,
     };
   }
   return state;

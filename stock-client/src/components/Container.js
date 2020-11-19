@@ -116,7 +116,7 @@ function Container(props) {
               }}
               className="main-right__percentage"
             >
-              {props.selectedStock.percentage}
+              {props.selectedStock.percentage}%
             </p>
             <svg
               className="main-right-chart"

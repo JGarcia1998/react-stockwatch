@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { useEffect, useState } from "react";
 import Button from "@material-ui/core/Button";
+
 function TopStocks(props) {
   const [showPopup, setShowPopup] = useState(false);
   const [stockUpdate, setStockUpdate] = useState([]);
@@ -34,10 +35,10 @@ function TopStocks(props) {
 
   async function fetchSymbols() {
     props.onSetStocks();
-    localStorage.setItem("stocksSet", true);
+
     for (let i = 0; i < symbols.length; i++) {
       await fetch(
-        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&apikey=LTTSRB12RXT9ZBDH`
+        `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=${symbols[i]}&apikey=${process.env.REACT_APP_STOCK}`
       )
         .then((res) => res.json())
         .then((allStocks) => {
@@ -53,8 +54,10 @@ function TopStocks(props) {
             let low = parseFloat(x[2]).toFixed(2);
             let close = parseFloat(x[3]).toFixed(2);
             let colorToSend;
+            let chng = close - open;
 
-            let percentage = close - open;
+            let percentage = (chng / close) * 100;
+
             if (percentage < 0) {
               colorToSend = "red";
             } else {
@@ -72,7 +75,7 @@ function TopStocks(props) {
               color: colorToSend,
             });
           } catch {
-            console.log("surpassed the limit of 4 requests in under a minute");
+            alert("Due to API block, please refresh the site in 1 minute");
           }
         });
     }
@@ -87,7 +90,7 @@ function TopStocks(props) {
 
     let search = e.target.dataset.name;
 
-    if (search != undefined) {
+    if (search !== undefined) {
       fetch(
         `https://newsapi.org/v2/everything?q=${search}&apiKey=` +
           process.env.REACT_APP_KEY
@@ -117,7 +120,7 @@ function TopStocks(props) {
               <img
                 src={article.urlToImage}
                 className="stock-updates__img"
-                alt="News Image"
+                alt="News Article"
               />
               <div className="stock-updates__col">
                 <h2 className="news__title">{article.title}</h2>
@@ -460,7 +463,7 @@ const mapDispatchToProps = (dispatch) => {
         value: {
           name: e.target.dataset.symbol,
           price: e.target.dataset.price,
-          symbol: e.target.dataset.attr,
+          symbol: e.target.dataset.symbol,
           percentage: e.target.dataset.percentage,
         },
       }),
