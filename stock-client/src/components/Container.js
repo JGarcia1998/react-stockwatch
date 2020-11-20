@@ -6,8 +6,12 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
+import Snackbar from "@material-ui/core/Snackbar";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from "@material-ui/icons/Close";
 
 function Container(props) {
+  const [open, setOpen] = React.useState({ open: false, message: "" });
   const useStyles = makeStyles((theme) => ({
     root: {
       "& > *": {
@@ -16,7 +20,13 @@ function Container(props) {
     },
   }));
   const classes = useStyles();
-  const [news, setNews] = useState([]);
+
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen({ open: false, message: "" });
+  };
 
   useEffect(() => {
     fetch(
@@ -31,7 +41,7 @@ function Container(props) {
 
   const watchlistDB = () => {
     if (props.currId === null) {
-      alert("You need to log in first");
+      setOpen({ open: true, message: "You need to log in first" });
     } else {
       fetch("http://localhost:1234/watchlist", {
         method: "POST",
@@ -45,13 +55,37 @@ function Container(props) {
       })
         .then((res) => res.json())
         .then((result) => {
-          alert(result.message);
+          setOpen({ open: true, message: result.message });
         });
     }
   };
 
   return (
     <>
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          open={open.open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message={open.message}
+          action={
+            <React.Fragment>
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </React.Fragment>
+          }
+        />
+      </div>
       <div className="main-body">
         <Navbar></Navbar>
 
