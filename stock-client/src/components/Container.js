@@ -5,21 +5,11 @@ import TopStocks from "./TopStocks";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import Snackbar from "@material-ui/core/Snackbar";
-import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import { Button, Snackbar, IconButton } from "@material-ui/core";
 
 function Container(props) {
-  const [open, setOpen] = React.useState({ open: false, message: "" });
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-      },
-    },
-  }));
-  const classes = useStyles();
+  const [open, setOpen] = useState({ open: false, message: "" });
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -34,7 +24,6 @@ function Container(props) {
     )
       .then((response) => response.json())
       .then((result) => {
-        console.log(result.articles);
         props.setNews(result.articles.splice(0, 5));
       });
   }, [props.setNews]);
@@ -75,7 +64,7 @@ function Container(props) {
           onClose={handleClose}
           message={open.message}
           action={
-            <React.Fragment>
+            <>
               <IconButton
                 size="small"
                 aria-label="close"
@@ -84,7 +73,7 @@ function Container(props) {
               >
                 <CloseIcon fontSize="small" />
               </IconButton>
-            </React.Fragment>
+            </>
           }
         />
       </div>

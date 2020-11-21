@@ -1,3 +1,10 @@
+/*
+0-600px phone
+600-900px tablet prtrait
+900-1200px tablet landscape
+1200-1800px normal styles
+1800px+ big desktop
+*/
 *,
 *::after,
 *::before {
@@ -7,6 +14,9 @@
 
 html {
   font-size: 62.5%; }
+  @media (max-width: 62.5em) {
+    html {
+      font-size: 56.25%; } }
 
 body {
   font-family: "Roboto", sans-serif;
@@ -257,6 +267,9 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly; }
+  @media (max-width: 47.5em) {
+    .navbar {
+      padding: 3rem 2rem; } }
   .navbar__img {
     background-image: url("./img/stock.svg");
     width: 2.5rem;
@@ -275,6 +288,9 @@ body {
     position: relative;
     text-decoration: none;
     color: black; }
+    @media (max-width: 47.5em) {
+      .navbar__icon {
+        padding-left: 0; } }
   .navbar__effect {
     content: "";
     position: absolute;
@@ -329,6 +345,10 @@ body {
   transform: translate(-50%, -50%);
   display: grid;
   grid-template-columns: 1fr 2fr 1fr; }
+  @media (max-width: 47.5em) {
+    .main-body {
+      width: 100vw;
+      height: 100vh; } }
 
 .active {
   color: #0056d6; }
@@ -345,6 +365,9 @@ body {
     grid-template-rows: 1fr 1fr 1fr;
     margin-left: 1rem;
     margin-bottom: 5rem; }
+    @media (max-width: 62.5em) {
+      .header__stock-news-grid {
+        grid-template-columns: 1fr; } }
     .header__stock-news-grid-title {
       font-size: 1.4rem;
       color: black;
@@ -430,6 +453,10 @@ body {
     flex-direction: column; }
   .header__stock-row {
     display: flex; }
+    @media (max-width: 62.5em) {
+      .header__stock-row {
+        flex-direction: column;
+        margin: 0 auto; } }
   .header__stock {
     width: 25rem;
     height: 15rem;
@@ -549,6 +576,12 @@ body {
     padding: 3rem;
     display: flex;
     flex-direction: column; }
+    @media (max-width: 47.5em) {
+      .main-right__stock {
+        width: 100%;
+        height: 40%;
+        top: 1rem;
+        right: 2rem; } }
   .main-right__name {
     font-size: 3rem;
     font-weight: 400;
@@ -593,6 +626,9 @@ body {
   margin: 1rem auto;
   background-image: linear-gradient(to right bottom, #525252, #202020);
   border-radius: 4px; }
+  @media (max-width: 62.5em) {
+    .news {
+      flex-direction: column; } }
   .news-popup {
     animation: fade-in 0.4s;
     width: 95vw;
@@ -625,6 +661,10 @@ body {
     background-size: cover;
     border-radius: 4px;
     object-fit: cover; }
+    @media (max-width: 62.5em) {
+      .news__img {
+        width: 100%;
+        height: 20rem; } }
   .news__title {
     color: #fff;
     font-size: 2rem;

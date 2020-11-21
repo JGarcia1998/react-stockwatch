@@ -19,7 +19,7 @@ function Login(props) {
         if (result.login === true) {
           props.onSetAuthenticated();
           props.onSetUserId(result.id);
-        } else if (result.login === false) {
+        } else if (!result.login) {
           alert("Login incorrect");
         }
       });
@@ -37,7 +37,7 @@ function Login(props) {
         return response.json();
       })
       .then((result) => {
-        if (result.login === true) {
+        if (result.login) {
           props.onSetAuthenticated();
           props.onSetUserId(result.id);
         } else {

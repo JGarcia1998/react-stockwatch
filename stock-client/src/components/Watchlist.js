@@ -67,7 +67,9 @@ function Watchlist(props) {
     })
       .then((res) => res.json())
       .then((result) => {
-        setWatchlist(result.watchlist);
+        if (result.watchlist) {
+          setWatchlist(result.watchlist);
+        }
       })
       .catch((err) => {
         console.error(err);

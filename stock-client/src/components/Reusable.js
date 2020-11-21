@@ -73,14 +73,6 @@ function Reusable(props) {
     props.onCryptoInfo(temp);
   }
 
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-      },
-    },
-  }));
-
   const showPopupFunc = (e) => {
     if (showPopup === false) {
       setShowPopup(true);
@@ -90,8 +82,7 @@ function Reusable(props) {
 
     if (search != undefined) {
       fetch(
-        `https://newsapi.org/v2/everything?q=${search}&apiKey=` +
-          process.env.REACT_APP_KEY
+        `https://newsapi.org/v2/everything?q=${search}&apiKey=${process.env.REACT_APP_KEY}`
       )
         .then((res) => res.json())
         .then((results) => {

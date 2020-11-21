@@ -8,6 +8,11 @@
   transform: translate(-50%, -50%);
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+
+  @include respond(tab-port) {
+    width: 100vw;
+    height: 100vh;
+  }
 }
 
 .active {
@@ -27,6 +32,10 @@
     grid-template-rows: 1fr 1fr 1fr;
     margin-left: 1rem;
     margin-bottom: 5rem;
+
+    @include respond(tab-land) {
+      grid-template-columns: 1fr;
+    }
 
     &-title {
       font-size: 1.4rem;
@@ -149,6 +158,11 @@
 
   &__stock-row {
     display: flex;
+
+    @include respond(tab-land) {
+      flex-direction: column;
+      margin: 0 auto;
+    }
   }
 
   &__stock {
