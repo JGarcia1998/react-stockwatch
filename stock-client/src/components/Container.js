@@ -5,31 +5,78 @@ import TopStocks from "./TopStocks";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
+import CloseIcon from "@material-ui/icons/Close";
+import { Button, Snackbar, IconButton } from "@material-ui/core";
 
 function Container(props) {
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      "& > *": {
-        margin: theme.spacing(1),
-      },
-    },
-  }));
-  const classes = useStyles();
-  const [news, setNews] = useState([]);
+  const [open, setOpen] = useState({ open: false, message: "" });
 
-  //   useEffect(() => {
-  //     fetch(
-  //       `https://newsapi.org/v2/top-headlines?country=us?category=business?&apiKey=${process.env.REACT_APP_KEY}`
-  //     )
-  //       .then((response) => response.json())
-  //       .then((result) => {
-  //         setNews(result.articles);
-  //       });
-  //   }, [setNews]);
+  const handleClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpen({ open: false, message: "" });
+  };
+
+  useEffect(() => {
+    fetch(
+      `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_KEY}`
+    )
+      .then((response) => response.json())
+      .then((result) => {
+        props.setNews(result.articles.splice(0, 5));
+      });
+  }, [props.setNews]);
+
+  const watchlistDB = () => {
+    if (props.currId === null) {
+      setOpen({ open: true, message: "You need to log in first" });
+    } else {
+      fetch("http://localhost:1234/watchlist", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userid: props.currId,
+          symbol: props.selectedStock.name
+            ? props.selectedStock.name
+            : props.selectedStock.symbol,
+        }),
+      })
+        .then((res) => res.json())
+        .then((result) => {
+          setOpen({ open: true, message: result.message });
+        });
+    }
+  };
 
   return (
     <>
+      <div>
+        <Snackbar
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "center",
+          }}
+          open={open.open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          message={open.message}
+          action={
+            <>
+              <IconButton
+                size="small"
+                aria-label="close"
+                color="inherit"
+                onClick={handleClose}
+              >
+                <CloseIcon fontSize="small" />
+              </IconButton>
+            </>
+          }
+        />
+      </div>
       <div className="main-body">
         <Navbar></Navbar>
 
@@ -47,13 +94,15 @@ function Container(props) {
 
           <h2 className="header__news-title">News articles around the globe</h2>
 
-          {/* {news.splice(0, 6).map((article) => {
+          {props.news.map((article, index) => {
+            const link = article.url;
+
             return (
-              <div className="news">
+              <div key={index} className="news">
                 <img
                   src={article.urlToImage}
                   className="news__img"
-                  alt="News Image"
+                  alt="News"
                 />
                 <div className="news__col">
                   <h2 className="news__title">{article.title}</h2>
@@ -66,22 +115,35 @@ function Container(props) {
                     }}
                     variant="contained"
                     color="primary"
-                    href="#"
+                    href={link}
+                    target="__blank"
                   >
                     Article
                   </Button>
                 </div>
               </div>
             );
-          })} */}
+          })}
         </div>
 
         <div className="main-right">
           <div className="main-right__stock">
-            <div className="main-right__logo">{props.selectedStock.symbol}</div>
-            <h2 className="main-right__name">{props.selectedStock.name}</h2>
+            <div className="main-right__logo">
+              {props.selectedStock.symbol?.split("")[0]}
+            </div>
+            <h2 className="main-right__name">{props.selectedStock.symbol}</h2>
             <p className="main-right__price">${props.selectedStock.price}</p>
-            <p className="main-right__percentage">+2.2% (5.76)</p>
+            <p
+              style={{
+                color:
+                  props.selectedStock.percentage < 0
+                    ? "red"
+                    : "rgb(30, 216, 139)",
+              }}
+              className="main-right__percentage"
+            >
+              {props.selectedStock.percentage}%
+            </p>
             <svg
               className="main-right-chart"
               xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +175,7 @@ function Container(props) {
           </div>
         </div>
 
-        <button className="btn-fixed"></button>
+        <button onClick={watchlistDB} className="btn-fixed"></button>
       </div>
     </>
   );
@@ -122,7 +184,19 @@ function Container(props) {
 const mapStateToProps = (state) => {
   return {
     selectedStock: state.selectedStock,
+    currId: state.userId,
+    news: state.news,
   };
 };
 
-export default connect(mapStateToProps)(Container);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setNews: (info) =>
+      dispatch({
+        type: "SETNEWS",
+        value: info,
+      }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Container);

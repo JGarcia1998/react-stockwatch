@@ -18,6 +18,28 @@ function Login(props) {
       .then((result) => {
         if (result.login === true) {
           props.onSetAuthenticated();
+          props.onSetUserId(result.id);
+        } else if (!result.login) {
+          alert("Login incorrect");
+        }
+      });
+  };
+
+  const handleGuestLogin = () => {
+    fetch("http://localhost:1234/login", {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ username: "guest", password: "guest" }),
+    })
+      .then((response) => {
+        return response.json();
+      })
+      .then((result) => {
+        if (result.login) {
+          props.onSetAuthenticated();
+          props.onSetUserId(result.id);
         } else {
           alert("Login incorrect");
         }
@@ -82,7 +104,9 @@ function Login(props) {
           >
             or
           </p>
-          <button className="container__guest">Log in as guest</button>
+          <button onClick={handleGuestLogin} className="container__guest">
+            Log in as guest
+          </button>
         </div>
       </div>
       {props.authentication === true ? <Redirect to="/" /> : null}
@@ -103,6 +127,13 @@ const mapDispatchToProps = (dispatch) => {
         type: "SETAUTHENTICATED",
         value: true,
       }),
+
+    onSetUserId: (id) => {
+      dispatch({
+        type: "SETID",
+        value: id,
+      });
+    },
   };
 };
 

@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Container from "./components/Container";
+import Cryptos from "./components/Crypto";
+import Watchlist from "./components/Watchlist";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 
@@ -24,6 +26,8 @@ ReactDOM.render(
             <Route component={Container} path="/" exact></Route>
             <Route component={Login} path="/login" exact></Route>
             <Route component={Register} path="/register" exact></Route>
+            <Route component={Watchlist} path="/watchlist" exact></Route>
+            <Route component={Cryptos} path="/crypto" exact></Route>
           </Switch>
         </App>
       </Provider>

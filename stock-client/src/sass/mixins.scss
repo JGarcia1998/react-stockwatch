@@ -45,3 +45,40 @@
   cursor: pointer;
   position: relative;
 }
+
+// 1200px / 16 = 75 to get ems
+// media queries manager
+/*
+0-600px phone
+600-900px tablet prtrait
+900-1200px tablet landscape
+1200-1800px normal styles
+1800px+ big desktop
+*/
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: 40.625em) {
+      //650px
+      @content;
+    }
+  }
+  @if $breakpoint == tab-port {
+    @media (max-width: 47.5em) {
+      //760px
+      @content;
+    }
+  }
+  @if $breakpoint == tab-land {
+    @media (max-width: 62.5em) {
+      //1000px
+      @content;
+    }
+  }
+  @if $breakpoint == big-desktop {
+    @media (min-width: 112.5em) {
+      //1800px+
+      @content;
+    }
+  }
+}

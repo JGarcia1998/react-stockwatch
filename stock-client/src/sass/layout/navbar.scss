@@ -5,6 +5,10 @@
   flex-direction: column;
   justify-content: space-evenly;
 
+  @include respond(tab-port) {
+    padding: 3rem 2rem;
+  }
+
   &__img {
     background-image: url("./img/stock.svg");
     width: 2.5rem;
@@ -25,6 +29,10 @@
     position: relative;
     text-decoration: none;
     color: black;
+
+    @include respond(tab-port) {
+      padding-left: 0;
+    }
   }
 
   &__effect {
@@ -38,7 +46,7 @@
     height: 1rem;
     opacity: 0;
 
-    background-color: rgb(23, 104, 255);
+    background-color: rgb(39, 113, 250);
     transition: 0.4s cubic-bezier(0.86, 0, 0.07, 1);
   }
 

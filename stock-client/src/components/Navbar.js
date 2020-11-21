@@ -1,13 +1,25 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@material-ui/core";
 import { NavLink, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 import HomeOutlinedIcon from "@material-ui/icons/HomeOutlined";
 import AddShoppingCartRoundedIcon from "@material-ui/icons/AddShoppingCartRounded";
 import ShowChartRoundedIcon from "@material-ui/icons/ShowChartRounded";
 import GraphicEqRoundedIcon from "@material-ui/icons/GraphicEqRounded";
 import ExitToAppRoundedIcon from "@material-ui/icons/ExitToAppRounded";
 
-function Navbar() {
+function Navbar(props) {
+  const logOut = () => {
+    props.onLogOut();
+  };
+
+  useEffect(() => {
+    setTimeout(function () {
+      props.onSetShowCrypto();
+    }, 60000);
+  }, []);
+
   return (
     <div className="navbar">
       <div className="navbar__container">
@@ -42,23 +54,60 @@ function Navbar() {
         <div className="navbar__label">Stocks</div>
       </NavLink>
 
-      <NavLink to="/crypto" className="navbar__icon">
-        <div className="navbar__effect"></div>
-        <GraphicEqRoundedIcon
-          style={{ fontSize: 30, zIndex: 250, color: "black" }}
-        ></GraphicEqRoundedIcon>
-        <div className="navbar__label">Crypto</div>
-      </NavLink>
+      {props.showCrypto === true ? (
+        <NavLink to="/crypto" className="navbar__icon">
+          <div className="navbar__effect"></div>
+          <GraphicEqRoundedIcon
+            style={{ fontSize: 30, zIndex: 250, color: "black" }}
+          ></GraphicEqRoundedIcon>
+          <div className="navbar__label">Crypto</div>
+        </NavLink>
+      ) : null}
 
-      <NavLink to="/logout" className="navbar__icon">
-        <div className="navbar__effect"></div>
-        <ExitToAppRoundedIcon
-          style={{ fontSize: 30, zIndex: 250, color: "black" }}
-        ></ExitToAppRoundedIcon>
-        <div className="navbar__label">Sign out</div>
-      </NavLink>
+      {props.currUser === true ? (
+        <NavLink onClick={logOut} to="/login" className="navbar__icon">
+          <div className="navbar__effect"></div>
+          <ExitToAppRoundedIcon
+            style={{ fontSize: 30, zIndex: 250, color: "black" }}
+          ></ExitToAppRoundedIcon>
+          <div className="navbar__label">Sign out</div>
+        </NavLink>
+      ) : (
+        <NavLink to="/login" className="navbar__icon">
+          <div className="navbar__effect"></div>
+          <ExitToAppRoundedIcon
+            style={{ fontSize: 30, zIndex: 250, color: "black" }}
+          ></ExitToAppRoundedIcon>
+          <div className="navbar__label">Login</div>
+        </NavLink>
+      )}
     </div>
   );
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+  return {
+    currUser: state.authenticated,
+    showCrypto: state.showCrypto,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogOut: () => {
+      dispatch({
+        type: "SETLOGOUT",
+        value: false,
+      });
+    },
+
+    onSetShowCrypto: () => {
+      dispatch({
+        type: "SETSHOWCRYPTO",
+        value: true,
+      });
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

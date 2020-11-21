@@ -16,8 +16,7 @@ export default function StockNews() {
 
     if (search != undefined) {
       fetch(
-        `https://newsapi.org/v2/everything?q=${search}&apiKey=` +
-          process.env.REACT_APP_KEY
+        `https://newsapi.org/v2/everything?q=${search}&apiKey=${process.env.REACT_APP_KEY}`
       )
         .then((res) => res.json())
         .then((results) => {
@@ -28,6 +27,7 @@ export default function StockNews() {
   };
   const closePopUp = () => {
     setShowPopup(false);
+    setStockUpdate([]);
   };
 
   return (
@@ -37,9 +37,10 @@ export default function StockNews() {
           X
         </button>
 
-        {stockUpdate.splice(0, 4).map((article) => {
+        {stockUpdate.splice(0, 4).map((article, index) => {
+          const link = article.url;
           return (
-            <div className="stock-updates">
+            <div key={index} className="stock-updates">
               <img
                 src={article.urlToImage}
                 className="stock-updates__img"
@@ -56,7 +57,8 @@ export default function StockNews() {
                   }}
                   variant="contained"
                   color="primary"
-                  href="#"
+                  href={link}
+                  target="__blank"
                 >
                   Article
                 </Button>
