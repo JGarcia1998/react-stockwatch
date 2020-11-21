@@ -7,6 +7,7 @@ function TopStocks(props) {
   const [showPopup, setShowPopup] = useState(false);
   const [stockUpdate, setStockUpdate] = useState([]);
   const [prevStock, setPrevStock] = useState(null);
+  const [flag, setFlag] = useState({ active: false });
 
   const symbols = ["AAPL", "NFLX", "GOOGL", "TSLA"];
   let temp = [];

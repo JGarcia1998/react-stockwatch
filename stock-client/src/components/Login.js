@@ -18,7 +18,7 @@ function Login(props) {
       .then((result) => {
         if (result.login === true) {
           props.onSetAuthenticated();
-        } else {
+        } else if (result.login === false) {
           alert("Login incorrect");
         }
       });

@@ -111,14 +111,14 @@ app.post("/login", (req, res) => {
       username: username,
     },
   }).then((user) => {
-    if (user) {
+    if (user !== null) {
       bcrypt.compare(password, user.password, (err, result) => {
         if (result === true) {
           res.send({ login: true, id: user.id });
-        } else {
-          res.send({ login: false });
         }
       });
+    } else {
+      res.send({ login: false });
     }
   });
 });
