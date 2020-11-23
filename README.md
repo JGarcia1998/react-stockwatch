@@ -6,6 +6,8 @@ Here is the main dashboard upon load of the site. 4 main stocks are immediately 
 
 <img width="1213" alt="stockwatchnew" src="https://user-images.githubusercontent.com/62822850/99897034-95b14180-2c5b-11eb-9a4c-1389a3d64c3f.png">
 
+# Watchlist
+Here is the users watchlist, symbols are stored in a PostgreSQL database and new prices are fetched when the user selects, "stats". Users are allowed up to 4 watchlisted stocks at a time.
 
 <img width="1223" alt="Screen Shot 2020-11-22 at 7 53 53 PM" src="https://user-images.githubusercontent.com/62822850/99923867-563b3180-2cfd-11eb-882a-b2de3cc17366.png">
 
