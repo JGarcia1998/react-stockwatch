@@ -21,3 +21,11 @@ Here is the crypto currnecy tab, similar to the main stock dashboard, users can 
 
 <img width="1195" alt="Screen Shot 2020-11-22 at 8 10 58 PM" src="https://user-images.githubusercontent.com/62822850/99924204-e037ca00-2cfe-11eb-8e80-8ab1726da37c.png">
 
+# Installation
+This application can only be ran through localhost, online deployment is not allowed. 
+
+- Clone this repository.
+- Run npm install in the root directory.
+- cd into stock-client and run "npm start" to start the client side.
+- in a seperate directory, cd into stock-server and run "node app.js" to start the server.
+
