@@ -358,7 +358,8 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   display: grid;
-  grid-template-areas: "nav header header header right"; }
+  grid-template-areas: "nav header right";
+  grid-template-columns: 1fr 2fr 1fr; }
   @media (max-width: 47.5em) {
     .main-body {
       width: 100vw;

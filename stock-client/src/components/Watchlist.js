@@ -10,7 +10,9 @@ function Watchlist(props) {
 
   useEffect(() => {
     if (props.currId !== null && props.userAuth === true) {
-      fetch("http://localhost:1234/user-watchlist/" + props.currId.toString())
+      fetch(
+        `https://safe-citadel-64633.herokuapp.com/user-watchlist/${props.currId}`
+      )
         .then((res) => res.json())
         .then((result) => {
           if (result.watchlist) {
@@ -58,13 +60,16 @@ function Watchlist(props) {
   };
 
   const removeItem = (item) => {
-    fetch("http://localhost:1234/remove-item/" + props.currId, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ item: item }),
-    })
+    fetch(
+      "https://safe-citadel-64633.herokuapp.com/remove-item/" + props.currId,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ item: item }),
+      }
+    )
       .then((res) => res.json())
       .then((result) => {
         if (result.watchlist) {

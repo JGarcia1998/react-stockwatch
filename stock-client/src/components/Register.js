@@ -6,7 +6,7 @@ export default function Login() {
   const [user, setUser] = useState({});
 
   const registerDB = () => {
-    fetch("http://localhost:1234/create-account", {
+    fetch("https://safe-citadel-64633.herokuapp.com/create-account", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

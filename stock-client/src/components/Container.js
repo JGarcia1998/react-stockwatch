@@ -24,7 +24,9 @@ function Container(props) {
     )
       .then((response) => response.json())
       .then((result) => {
-        props.setNews(result.articles.splice(0, 5));
+        if (result) {
+          props.setNews(result.articles.splice(0, 5));
+        }
       });
   }, [props.setNews]);
 
@@ -32,7 +34,7 @@ function Container(props) {
     if (props.currId === null) {
       setOpen({ open: true, message: "You need to log in first" });
     } else {
-      fetch("http://localhost:1234/watchlist", {
+      fetch("https://safe-citadel-64633.herokuapp.com/watchlist", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

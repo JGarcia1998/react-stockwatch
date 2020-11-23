@@ -93,8 +93,7 @@ function TopStocks(props) {
 
     if (search !== undefined) {
       fetch(
-        `https://newsapi.org/v2/everything?q=${search}&apiKey=` +
-          process.env.REACT_APP_KEY
+        `https://newsapi.org/v2/everything?q=${search}&apiKey=${process.env.REACT_APP_KEY}`
       )
         .then((res) => res.json())
         .then((results) => {

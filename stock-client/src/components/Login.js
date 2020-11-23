@@ -7,7 +7,7 @@ function Login(props) {
   const [login, setLogin] = useState({});
 
   const loginDB = () => {
-    fetch("http://localhost:1234/login", {
+    fetch("https://safe-citadel-64633.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -26,7 +26,7 @@ function Login(props) {
   };
 
   const handleGuestLogin = () => {
-    fetch("http://localhost:1234/login", {
+    fetch("https://safe-citadel-64633.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-type": "application/json",
