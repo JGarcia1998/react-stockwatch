@@ -1,6 +1,15 @@
 # StockWatch
 StockWatch is a Currency dashboard for daily updates on stocks and crypto prices along with news articles related to each currency. Users can add stocks to their personalized watchlist after creating an account with the application. Users can also view recent news articles for each stock or crypto currency. Cards will display the open, high, close, low and percentage change in value over the course of the day.   
 
+# Teachnologies 
+- React
+- Redux
+- Material UI
+- Node.js
+- Express.js
+- PostgreSQL
+- Sequelize ORM
+
 # Dashboard(Main page)
 Here is the main dashboard upon load of the site. 4 main stocks are immediately fetched and served from an up to date API. The top right card showcases the selected stock, users can select any stock they would like and add it to their watchlist assuming they are logged in. Users can also fetch recent news articles related to each stock using the news button on the cards.
 
